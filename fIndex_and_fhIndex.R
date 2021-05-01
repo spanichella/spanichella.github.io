@@ -1,12 +1,12 @@
 
 #F-Index:  funding / number of years after the PhD 
-EUR_exchange<- 0.9022
+EUR_exchange<- 0.9259
 ARIES_Project_CHF<-500000
 SURF_Project_CHF<- 349926
 COSMOS_project_EUR<- 770000
 funding_in_CHF<- ARIES_Project_CHF+SURF_Project_CHF+COSMOS_project_EUR/EUR_exchange
 print(funding_in_CHF)
-funding_in_EUR<- funding_in_CHF * 0.9022
+funding_in_EUR<- funding_in_CHF * 0.9259
 print(funding_in_EUR)
 
 H_Index<- 29
