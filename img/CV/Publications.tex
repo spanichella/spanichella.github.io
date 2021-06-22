@@ -1,0 +1,706 @@
+\documentclass[10pt]{article}
+\usepackage{calc}
+\usepackage{hyperref}
+\usepackage{graphicx} 
+\reversemarginpar
+   
+\usepackage[paper=letterpaper, 
+            marginparwidth=1.2in, 
+            marginparsep=.05in, 
+            marcugin=1in,
+            includemp]{geometry}
+
+\setlength{\parindent}{0in}
+
+\usepackage[shortlabels]{enumitem}
+ 
+\makeatletter
+\newlength{\bibhang}
+\setlength{\bibhang}{1em}
+\newlength{\bibsep}
+ {\@listi \global\bibsep\itemsep \global\advance\bibsep by\parsep}
+\newlist{bibsection}{itemize}{3}
+\setlist[bibsection]{label=,leftmargin=\bibhang,%
+        itemindent=-\bibhang,
+        itemsep=\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\newlist{bibenum}{enumerate}{3}
+\setlist[bibenum]{label=[\arabic*],resume,leftmargin={\bibhang+\widthof{[999]}},%
+        itemindent=-\bibhang,
+        itemsep=\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\let\oldendbibenum\endbibenum
+\def\endbibenum{\oldendbibenum\vspace{-.6\baselineskip}}
+\let\oldendbibsection\endbibsection
+\def\endbibsection{\oldendbibsection\vspace{-.6\baselineskip}}
+\makeatother
+
+
+
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+%\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%
+       \parbox{4in}{\, \hfill %
+                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+%                    \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+
+
+\newcommand{\makeheading}[2][]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+             {\large \bfseries #2 \hfill #1}\\[-0.15\baselineskip]%
+                 \rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+\renewcommand{\section}[1]{\pagebreak[3]%
+    \vspace{1.3\baselineskip}%
+    \phantomsection\addcontentsline{toc}{section}{#1}%
+    \noindent\llap{\scshape\smash{\parbox[t]{\marginparwidth}{\hyphenpenalty=10000\raggedright #1}}}%
+    \vspace{-\baselineskip}\par}
+
+\newcommand*\fixendlist[1]{%
+    \expandafter\let\csname preFixEndListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixEndListend#1\endcsname\vspace{-0.6\baselineskip}}}
+
+\let\originalItem\item
+\newcommand*\fixouterlist[1]{%
+    \expandafter\let\csname preFixOuterList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\csname preFixOuterList#1\endcsname\let\oldItem\item\def\item{\pagebreak[2]\oldItem}}
+    \expandafter\let\csname preFixOuterListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\let\item\oldItem\csname preFixOuterListend#1\endcsname}}
+\newcommand*\fixinnerlist[1]{%
+    \expandafter\let\csname preFixInnerList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\let\oldItem\item\let\item\originalItem\csname preFixInnerList#1\endcsname}
+    \expandafter\let\csname preFixInnerListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixInnerListend#1\endcsname\let\item\oldItem}}
+ 
+\newlist{outerlist}{itemize}{3}
+    \setlist[outerlist]{label=\enskip\textbullet,leftmargin=*}
+    \fixendlist{outerlist}
+    \fixouterlist{outerlist}
+
+\newlist{lonelist}{itemize}{3}
+    \setlist[lonelist]{label=\enskip\textbullet,leftmargin=*,partopsep=0pt,topsep=0pt}
+    \fixendlist{lonelist}
+    \fixouterlist{lonelist}
+
+\newlist{innerlist}{itemize}{3}
+    \setlist[innerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixinnerlist{innerlist}
+
+\newlist{loneinnerlist}{itemize}{3}
+    \setlist[loneinnerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixendlist{loneinnerlist}
+    \fixinnerlist{loneinnerlist}
+
+\newcommand{\blankline}{\quad\pagebreak[3]}
+\newcommand{\halfblankline}{\quad\vspace{-0.5\baselineskip}\pagebreak[3]}
+
+\newcommand\doilink[1]{\href{http://dx.doi.org/#1}{#1}}
+\newcommand\doi[1]{doi:\doilink{#1}}
+
+\providecommand*\url[1]{\href{#1}{#1}}
+\renewcommand*\url[1]{\href{#1}{\texttt{#1}}}
+\providecommand*\email[1]{\href{mailto:#1}{#1}}
+\providecommand\BibTeX{{B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    \TeX}}
+\providecommand\Matlab{\textsc{Matlab}}
+\hyphenation{bio-mim-ic-ry bio-in-spi-ra-tion re-us-a-ble pro-vid-er}
+
+\begin{document}
+\makeheading{Sebastiano Panichella -  Publications (or Research output list)}
+
+\newlength{\rcollength}\setlength{\rcollength}{1.85in}%
+\newlength{\spacewidth}\setlength{\spacewidth}{20pt}
+\newcommand\spacechar{$|$}
+\blankline
+\\\\\\\\
+{\footnotesize
+
+
+Currently Sebastiano Panichella is a (Permanent) Senior Research Associate at Zurich University of Applied Science (from \textit{\textbf{20-08-2018}}), leading research in Software Engineering (SE) and cloud computing (CC) research fields. Previously he was postdoc at University of Zurich (\textit{\textbf{01-11-2014 - 19-08-2018}}) working in the \href{http://www.ifi.uzh.ch/seal.html}{\textit{SEAL Lab}} of \textbf{Prof. Harald Gall}.  \\
+
+  %such as Mobile Computing, Continuous Delivery and Continuous integration, and the  new line of research related to the use of Summarization Techniques for Code, Changes and Testing. 
+  His research interests include Mobile/Cloud Computing, Code Review, IR-based Traceability Recovery, Textual Analysis, Machine Learning and Genetic Algorithms applied to SE problems, Continuous Delivery (with special attention to Continuous Integration Problems), Software maintenance and evolution and Empirical Software Engineering (with particular focus on Cloud Applications), and the  new line of research related to the use of Summarization Techniques for Code, Changes and Testing.
+  %Another topic that is also of his interest is Code Review,  indeed, he is currently working and advising students on research ideas aimed at automating the process of code inspection.
+  He authored or co-authored \textbf{46} papers appeared in International Conferences and Journals (\textbf{28 published after the PhD}). In summary he published in high-ranked, peer-reviewed (according to the http://www.core.edu.au/conference-portal), and international venues (where he also received best and distinguished paper awards\footnote{ \fontsize{5}{6}\selectfont  \footnotesize https://spanichella.github.io/\#awards}). Specifically, he published, considering the conference venues, 7 papers at ICSE (RANK: A*), 3 at FSE  (RANK: A*), 6 at ICSME  (RANK: A), 2 at ASE (RANK: A), 1 at GECCO  (RANK: A), 8 at SANER, 1 at WCRE (RANK: B), 6 at ICPC (RANK: C); 1 at ONWARD (RANK: C). He also published papers at workshop like WAMA (1) and MaLTeSQuE (1). He also published in top journals such as TSE (1), EMSE (3), IST (1), STVR (1) and JSEP (1). \textbf{ \fontsize{5}{6} For reason of space, his  contributions in the above works are  described in the research output list.} \\
+\vspace{1mm}
+
+  During the postdoctoral experience, Sebastiano wrote and got accepted a first paper, that nowadays, has over 100 citations,  which makes this paper, one of the most cited at the ICSME (RANK A) conference in 2015. On top of the idea behind this work, Sebastiano wrote (100\% of) a proposal that was awarded (Sebastiano figured as co-applicant with Prof. Gall) by the Swiss National Science Foundation, i.e., the project SURF-MobileAppsData SNF -- No. 200021$-$166275-- (current results of the projects are available on-line\footnote{https://spanichella.github.io/tools.html}), which is funding his research collaboration with the UZH (since 2016), on mobile computing and mobile testing, and two PhD Students.  Hence,  to obtain more resources,  Sebastiano is planning  to target by next year relevant H2020 calls  (for which I already possess a valuable network), a SINERGIA proposal, and an ERC Starting grant on topics related to the project. \\
+ During the last years 
+%as pos experience 
+%as postdoc in the SEAL group 
+he  investigated further topics in SE and CC research fields.    Specifically, after the PhD, He published further (28) papers and  established the basis of  new research lines, not present and the UZH at the time, which are strongly related to the goals of this proposal. Among them, we can mention for example,  research work on  mobile computing (ICSE 2016, ICSE 2017, FSE 2016, etc.), automated testing  (ICSE 2017, SANER 2018, MaLTeSQuE 2018), advanced software maintenance and evolution problems where He successfully adopted Summarization Techniques, Machine Learning and Genetic Algorithms (ICSME 2015, ASE 2015, GECCO 2016). For instance, in the field of \textit{automated testing},  %\footnote{The part of testing research focused on generating tests automatically using symbolic execution, random search or evolutionary algorithms.}
+   he proposed the first  work  that demonstrates 
+   that test case summaries have an high potential to boost developers  productivity during bug fixing tasks. Such preliminarily results open the roads to the research ideas  
+    discussed in this project proposal.
+  These research work involved relevant industrial companies (e.g., ING NEDERLAND, Sony Mobile Communication) and their extensions will involve further industrial organizations in Switzerland and abroad (e.g.,  Allianz, Facebook, 
+Oracle Corporation, Google, etc.), and open source projects. \\
+
+His ambition as researcher is help students evolving research topics that are relevant also in industry, developing research prototypes and tools that will inspire state-or-practice in industrial environments.  Developing research prototypes and tools that are used in practice by practitioners represents an important step toward this goal. As consequence, several tools, research prototypes (e.g.,  YODA, SURF, DECA, ARdoc), and datasets were produced in the last years, and are available in his home page \footnote{https://spanichella.github.io/tools.html}.  Hence, his research involved relevant industrial companies (e.g., ING NEDERLAND, Sony Mobile Communication) and their extensions and my future work will involve further industrial  (e.g.,  Allianz, Facebook,  Oracle Corporation, Google, etc.) and research partners (as reported in the proposal) a and open source projects. \\
+
+
+\blankline
+\textbf{List of 5 selected Publications:}
+\blankline
+\\
+\blankline
+{\footnotesize
+
+The list of the 5 selected papers is based on the following criteria: (i) most novel and cited papers; (ii)  most related papers to the project proposal. 
+%\section{List of 5 selected Publications}
+Note that in papers marked with (*)  the authors are listed in alphabetic order. 
+\begin{bibenum}
+
+    \item C. Vassallo, G. Schermann, F. Zampetti, D. Romano, P. Leitner, A. Zaidman, M. di Penta, \underline{S. Panichella}.
+         \textbf{A Tale of CI Build Failures: an Open Source and a Financial Organization Perspective.}.  \emph{Proceedings of the 33rd International Conference on Software Maintenance and Evolution}  (ICSME 2017). \textit{Core RANK: A}. \\ Link to the paper: https://doi.org/10.1109/ICSME.2017.67 \\  
+         
+          \textit{\textbf{Paper contribution:}} Sebastiano  elaborated with Carmine Vassallo (PhD student hired in his recently accepted SNF project) the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. It is important to mention that this work involved the relevant software development context of the ING Netherland company and other open source projects. Moreover, even if the goal of this work is different to the one proposed in the proposal, this paper presents  important initial insights for achieving the goal of RT1 of the proposal.  Sebastiano and Carmine worked together on a parallel extension of this work, observing further software development dynamics related to the usage of static analysis tools in the CD/CI  and Code review contexts \ref{asat1}\ref{Cm2}. Other ongoing work concern both continuous delivery and code review practices.
+         
+ \item A. Di Sorbo,  \underline{S. Panichella}, C. V. Alexandru, J. Shimagaki, C. A. Visaggio, G. Canfora, H. Gall.
+         \textbf{What Would Users Change in My App? Summarizing App
+Reviews for Recommending Software Changes}.  In: \emph{24th ACM SIGSOFT International Symposium on the Foundations of Software Engineering} (FSE 2016)  will be held in Seattle, WA, USA.\\ Link to the paper: https://dl.acm.org/citation.cfm?doid=2950290.2950299\\
+   
+    \textit{\textbf{Paper contribution:}} 
+    Sebastiano performed the experiments advising Andrea Di Sorbo during the analysis of the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.  Sebastiano Panichella conceived the idea behind this work and designed the experiments. As matter of fact, this paper  represents the natural continuation of a work (indicated also in the list of all papers published during his career) where Sebastiano was the first author \ref{mobile:4}. Such previous work \ref{mobile:4} was   published during the postdoc experience at the SEAL group and isnowadays, one of the most cited papers of ICSME 2015 with over 100 citations in around 3years (as reported in the \textit{Google Scholar Ref:} \\\url{https://scholar.google.it/citations?user=HiNuBFgAAAAJ\&hl=en\&oi=ao}).\\ On top of the idea proposed in such a work Sebastiano also submitted and gotaccepted an SNF project proposal called SURF-MobileAppsData (SNF ProjectNo. 200021-166275). 
+    Sebastiano Panichella is working actively (e.g., in \ref{mobile:4} and \ref{ardoc}) on such topic with PhD students, \href{http://www.ifi.uzh.ch/en/seal/people/alexandru.html}{\textbf{Carol V. Alexandru}} and \href{http://www.ifi.uzh.ch/en/seal/people/adelinaciurumelea.html}{\textbf{Adelina Ciurumelea}} (see papers in the conference publications list\ref{mobile:1}\ref{mobile:2}\ref{mobile:3}\ref{Cm5}) and \href{http://www.ifi.uzh.ch/en/seal/people/grano}{\textbf{Giovanni Grano}} (see papers in the conference publications list\ref{Cm3} \ref{Cm1} \ref{Cm6}). Moreover, even if research Giovanni  is doing i collaboration with Sebastiano are different to the one proposed in the proposal, his recent accepted papers \ref{Cm3} \ref{Cm4} (supervised by Sebastiano) presents  important initial insights for achieving the goal of another RT of the proposal (e.g., RT2). \\\\ %Such results attracted also the attention of researchers working at Facebook, that are willing to collaborate in the project proposal.
+    
+           
+   \item \underline{S. Panichella}, A. Panichella, M. Bella, A. Zaidman, H. Gall. \textbf{The impact of test case summaries on bug fixing performance: An empirical investigation}. In: \emph{Proceedings of the 38th International Conference on Software Engineering} (ICSE 2016), Austin, TX.\\ Link to the paper: https://dl.acm.org/citation.cfm?doid=2884781.2884847\\
+    
+     \textit{\textbf{Paper contribution:}} Sebastiano Panichella conceived the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials (here the authors helped),  wrote the tool behind this research, wrote the paper (here the authors helped), prepared figures and/or tables (here the authors helped), performed the computation work, reviewed drafts of the paper (here the authors helped). This work together to other works \ref{fse:surf} \ref{Cm7}, \ref{Cm4}, represents the potential application of {\em ``Summarization approaches''} in SE and cloud computing research fields. More sophisticated techniques based on the concept of Summarization,  will be explored to achieve the goals of all the research tracks of the proposal. \\\\ %In collaboration with several developers of companies (with already established contacts)  in Germany, Switzerland (e.g. the stat-up BLINQ \footnote{\small{www.joinblinq.com}}), Austria, Italy (e.g. Independent News \& Media \footnote{\small{http://www.inm.ie/}}) and Japan (Sony Mobile Communications \footnote{\small{http://www.sonymobile.co.jp/}}) they are going to test the usefulness of the tool in their working context. They are also investigating several future research directions for the extension of such work. }
+     
+     \item  \label{deca1} A. Di Sorbo, \underline{S. Panichella}, C. Visaggio, M. Di Penta, G. Canfora,  H. Gall. \textbf{Development Emails Content Analyzer: Intention Mining in Developer Discussions}. In: \emph{30th international conference on Automated Software Engineering} (ASE 2015).  Lincoln, Nebraska.  \\ Link to the paper: https://doi.org/10.1109/ASE.2015.12\\
+    
+     \textit{\textbf{Paper contribution:}} Sebastiano Panichella conceived the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. As matter of fact, this paper  represents the natural continuation of a work (indicated also in the list of all papers published during his career) where Sebastiano was the first author \ref{codes1}. Such previous work \ref{codes1} was  published during the PhD experience at the University of Sannio. This work had several citations and involved further publications also involving students advised by Sebastiano (\ref{C4}, \ref{J01}, \ref{codes}, \ref{mentoring}, \ref{yoda}, \ref{icsme2014}, \ref{documentation}, etc.). This line of research results to be a precious starting point for RT1 and RT3 of the proposal.\\\\
+
+ \item G. Canfora, A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Multi-Objective Cross-Project Defect Prediction}. In: \emph{Proceedings of the 7th International Conference on Software Testing, Verification and Validation} (ICST 2013). Luxembourg.  \textit{Core RANK: A}. \\ Link to the paper: https://doi.org/10.1109/ICST.2013.38\\\\
+
+
+     \textit{\textbf{Paper contribution:}} Sebastiano Panichella conceived with Annibale Panichella the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. The work was nominated as one of the best papers of ICST conference in 2013 and got invited for extension to the STVR journal \ref{J1}. This work was also recently extended in collaboration with Carol Alexandru, PhD student at the University of Zurich \ref{gecco:1} and published to the \emph{25th International Conference on Genetic Algorithms (ICGA) and the 21st Annual Genetic Programming Conference (GP) (GECCO 2016)}. the gained knowledge on Genetic Algorithms by Sebastiano \ref{gecco:1}, \ref{J1}, \ref{ardoc}, \ref{multi1}, \ref{mobile:4} will be crucial for achieving the goals of RT1-2 of the proposal.\\
+      %        \begin{innerlist}
+%        
+%               \item     A. Ciurumelea, A. Schaufelbuhl, \underline{S. Panichella}, Harald Gall. \textbf{ Analyzing Reviews and Code of Mobile Apps for better Release Planning}. In: \emph{Proceedings of the 24th IEEE International Conference on Software Analysis, Evolution, and Reengineering (SANER) 2017. Klagenfurt, Austria}
+%        
+%           \item A. Di Sorbo,  \underline{S. Panichella}, C. V. Alexandru, C. A. Visaggio, G. Canfora.
+%         \textbf{SURF: Summarizer of User Reviews Feedback}.  Demonstrations Track of the  \emph{39th International Conference on Software Engineering} (ICSE 2017).
+%
+%\item F. Palomba, P. Salza, A. Ciurumelea,  \underline{S. Panichella}, H. Gall, F. Ferrucci,  A. De Lucia   \textbf{ Recommending and Localizing Change Requestsfor Mobile Apps based on User Reviews}.     In: \emph{39th International Conference on Software Engineering} (ICSE 2017).
+%
+%        \end{innerlist}
+    
+    
+    %}
+%    \item  \underline{S. Panichella}, G. Bavota, M. Di Penta, G. Canfora, G. Antoniol. \textbf{How Developers' Collaborations Identified from Different Sources Tell us About Code Changes}. In: \emph{Proceedings of the 30th International Conference on Software Maintenance and Evolution} (ICSME 2014). Victoria, Canada.\\
+%       
+%     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. }
+%     
+%\item  G. Canfora, M. Di Penta, R. Oliveto,  \underline{S. Panichella}. \textbf{*Who is going to Mentor Newcomers in Open Source Projects?}. In: \emph{Proceedings of the 29th ACM SIGSOFT International Symposium on Foundations of Software Engineering} (FSE 2012). Cary, North Carolina, USA.\\
+%       
+%     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. Sebastiano Panichella implemented with Stefano Giannantonio,  one of the bachelor students he advised during his PhD, a scalable implementation of the tool, called YODA, which was accepted as tool demo at ICSE \ref{yoda}.}
+
+
+% \item G. Bavota, G. Canfora, M. Di Penta, R. Oliveto, \underline{S. Panichella}. \textbf{*How the Apache Community Upgrades Dependencies}. \emph{Empirical Software Engineering (EMSE)} 2014.\\
+%             \doi{10.1007/s10664-014-9325-9} \\
+%       
+%     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived with Gabriele Bavota the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. }
+             
+\end{bibenum}
+}
+\blankline
+\newpage
+\blankline
+\textbf{List of all publications:}
+
+{\footnotesize
+
+
+\blankline
+
+\section{Publications in peer-reviewed scientific journals}
+In papers marked with (*)  the authors are listed in alphabetic order. %When such a rule is not followed, authors are listed by contribution.
+\textbf{\\\underline{Journal Publications during the postdoctoral experience:}}\\
+\begin{bibenum}
+
+     \item \label{J01}  Y. Zhou and 
+   C. Wang and Y. Xin and T. Chen and \underline{S. Panichella} and H. Gall . \textbf{Automatic Detection and Repair Recommendation of Directive Defects in Java API Documentation}.  \emph{Transaction on Software Engineering 2018} \\\textit{In press, available at https://spanichella.github.io/index.html\#publications}.
+
+\item \label{J0} C. Alexandru,  \underline{S. Panichella}, \underline{S. Proksch}, Harald Gall. \textbf{*Redundancy-free Analysis of Multi-revision Software Artifacts}. \emph{Empirical Software Engineering (EMSE)} 2018.\\\textit{In press, available at https://spanichella.github.io/index.html\#publications}.
+
+\item \label{J1} G. Canfora, A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Defect Prediction as a Multi-Objective Optimization Problem}. \emph{Software Testing, Verification and Reliability (STVR)} 2015.
+    \doi{10.1002/stvr.1570}\\
+           
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived with Annibale Panichella the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. }
+  \end{bibenum}
+  
+  \textbf{\\\underline{Journal Publications during the PhD study:}}\\
+  \begin{bibenum}
+    \item \label{J2} G. Bavota, G. Canfora, M. Di Penta, R. Oliveto, \underline{S. Panichella}. \textbf{*How the Apache Community Upgrades Dependencies}. \emph{Empirical Software Engineering (EMSE)} 2014.\\
+             \doi{10.1007/s10664-014-9325-9}
+             
+                    
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived with Gabriele Bavota the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. }
+             
+    \item \label{J3}  A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Applying a Smoothing Filter to Improve IR-based Traceability Recovery Processes: An Empirical Investigation}. \emph{Information and Software Technology (INFSOF)} 2012.\\
+        \doi{10.1016/j.infsof.2012.08.002}
+                    
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived  in his master thesis the idea behind this work. Thus, he designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. }
+
+
+    \item \label{J5} A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Labeling Source Code with Information Retrieval Methods: An Empirical Study}. \emph{Empirical Software Engineering (EMSE)} 2013. \doi{doi:10.1007/s10664-013-9285-5}
+                              
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived  the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. }
+        %       To Appear.\\
+\end{bibenum} 
+
+  \textbf{\\\underline{Journal Publications during the master study:}}\\
+\begin{bibenum}
+    \item \label{J4}  G. Capobianco, A. De Lucia, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Improving IR-based traceability recovery via noun-based indexing of software artifacts}. \emph{Journal of Software: Evolution and Process (JSE)} 2012.\\
+        \doi{10.1002/smr.1564}
+        
+                            
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived with Annibale Panichella the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. }
+
+\end{bibenum} 
+%\section{Submitted Journal Publications}
+%\begin{bibenum}
+%     \item     \underline{S. Panichella} Harald Gall. \textbf{Recommending Mentors in Open Source Projects to Grow-Up Long Term Contributors}. In: \emph{JSEP}\\
+%\end{bibenum}
+
+%\blankline   
+
+
+ 
+\blankline
+
+\section{Peer-reviewed conference proceedings}
+In papers marked with (*)  the authors are listed in alphabetic order. %When such a rule is not followed, authors are listed by contribution.
+
+\textbf{\\\underline{Conference Publications during the postdoctoral experience:}}\\
+\begin{bibenum}
+
+\item \label{Cm8}  Carol V. Alexandru; José J. Merchante; \underline{Sebastiano Panichella}; Sebastian Proksch; Harald C. Gall; Gregorio Robles. \textbf{On the Usage of Pythonic Idioms.}.  \emph{Onward! 2018} - \\\textit{to Appear, available at https://spanichella.github.io/index.html\#publications}. %\textit{Core RANK: B}.
+
+\textit{\textbf{Paper contribution:}} Gregorio proposed the idea behind the work. Sebastiano and Gregorio advised Carol and  José.
+Sebastian  and  Harald  helped in the final steps concerning the writing part of the work.
+
+      \item \label{Cm7}  \underline{S. Panichella}. \textbf{Summarization Techniques for Code, Change, Testing and User Feedback.}.  \emph{Proceedings of the  {IEEE} 25th International Conference on Software Analysis, Evolution
+               and Reengineering}  (SANER 2018) - \\\textit{https://doi.org/10.1109/VST.2018.8327148}. %\textit{Core RANK: B}.
+
+
+      \item \label{Cm6}  L. Pelloni, G. Grano, A. Ciurumelea, \underline{S. Panichella}, F. Palomba, H. Gall. \textbf{BECLoMA: Augmenting Stack Traces with User Review Information.}.  \emph{Proceedings of the  {IEEE} 25th International Conference on Software Analysis, Evolution
+               and Reengineering}  (SANER 2018) - \\\textit{https://doi.org/10.1109/SANER.2018.8330252}. %\textit{Core RANK: B}.
+               Tool implementing the work \ref{Cm3}.
+
+      \item \label{Cm5} A. Ciurumelea, \underline{S. Panichella}, H. Gall. \textbf{Automated User Reviews Analyser.}.  \emph{Proceedings of the  40th International Conference on Software Engineering}  (ICSE 2018) - \\\textit{http://doi.acm.org/10.1145/3183440.3194988}. %\textit{Core RANK: B}.
+          Tool implementing the work \ref{mobile:3}.
+
+
+      \item \label{Cm4}  G. Grano, T. V. Titov, \underline{S. Panichella}, F. Palomba, H. Gall. \textbf{ How High Will It Be? Using Machine Learning Models to Predict Branch Coverage in Automated Testing}.  \emph{MaLTeSQuE 2018 workshop}   (collocated with SANER 2018) \\\textit{https://doi.org/10.1109/MALTESQUE.2018.8368454}.
+
+                       
+     \textit{\textbf{Paper contribution:}} Sebastiano Panichella conceived the idea behind the work (as matter of fact, this work represent the natural extension of previous work published by Sebastiano at ICSE 2016  \ref{td}) and advised on this topic the master thesis of Timofey V. Titov (UZH). Thus, with Timofey he designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools. With Giovanni Grano (PhD at the UZH) and  Timofey he decided to submit the outcome of this thesis to the MaLTeSQuE workshop of SANER 2018. Giovanni, Timofey, Sebastiano  and Harald Gall 
+     wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. 
+
+      \item \label{Cm3}  G. Grano, A. Ciurumelea, \underline{S. Panichella}, F. Palomba, H. Gall. \textbf{ Exploring the Integration of User Feedback in Automated Testing of Android Applications.}.  \emph{Proceedings of the  {IEEE} 25th International Conference on Software Analysis, Evolution
+               and Reengineering}  (SANER 2018) \\\textit{https://doi.org/10.1109/SANER.2018.8330198}.
+
+     \textit{\textbf{Paper contribution:}} Sebastiano Panichella conceived the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. As matter of fact, this work represent the natural extension of previous work published by Sebastiano and some of the supervised students, i.e.,  \ref{fse:surf}, \ref{mobile:3} and \ref{td}.}
+
+
+      \item \label{Cm2}  C. Vassallo, \underline{S. Panichella}, F. Palomba, S. Proksch, A. Zaidman and H. Gall. \textbf{Context is King: The Developer Perspective on the Usage of Static Analysis Tools.}.  \emph{Proceedings of the  {IEEE} 25th International Conference on Software Analysis, Evolution
+               and Reengineering}  (SANER 2018) \\\textit{https://doi.org/10.1109/SANER.2018.8330195}\\
+               
+               \textit{\textbf{Paper contribution:}} Sebastiano Panichella conceived the idea behind the work and helped Carmine Vassallo in designing and performing the experiments, analyzing the data, contributing to the reagents/materials/analysis tools, wroting the paper. As matter of fact, this work represent the natural extension of previous work published by Sebastiano \ref{asat1}.}
+
+
+      \item \label{Cm1}  G. Grano, A. Di Sorbo, F. Mercaldo, C. Visaggio, G. Canfora, \underline{S. Panichella}. \textbf{Android Apps and User Feedback: a Dataset for Software Evolution and Quality Improvement.}.  \emph{Proceedings of the  International Workshop on App Market Analytics}  (WAMA 2017). http://doi.acm.org/10.1145/3121264.3121266\\
+               
+               \textit{\textbf{Paper contribution:}} Sebastiano Panichella conceived the idea behind the work and helped Giovanni Grano in designing and performing the experiments, analyzing the data, contributing to the reagents/materials/analysis tools, writing the paper. As matter of fact, this work represent the natural extension of previous work published by Sebastiano \ref{asat1}.}
+
+      
+
+      \item \label{C0}  C. Vassallo, G. Schermann, F. Zampetti, D. Romano, P. Leitner, A. Zaidman, M. di Penta, \underline{S. Panichella}.
+         \textbf{A Tale of CI Build Failures: an Open Source and a Financial Organization Perspective.}.  \emph{Proceedings of the 33rd International Conference on Software Maintenance and Evolution}  (ICSME 2017). \textit{Core RANK: A}. \\https://doi.org/10.1109/ICSME.2017.67
+         
+         \\   \textit{\textbf{Paper contribution:}} Sebastiano  elaborated with Carmine Vassallo (PhD student hired in his recently accepted SNF project) the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.
+         
+      \item \label{mobile:0} C. V. Alexandru, \underline{S. Panichella}, Harald Gall.
+         \textbf{Replicating Parser Behavior using Neural Machine Translation}.  \emph{Proceedings of the 25th International Conference on Program Comprehension} (ICPC 2017). \\\textit{Core RANK: C}. https://doi.org/10.1109/ICPC.2017.11
+
+   
+     \textit{\textbf{Paper contribution:} Carol Alexandru  conceived the idea behind the work. Carol, under the main supervision of Sebastiano Panichella,   designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+
+      \item \label{mobile:1} A. Di Sorbo,  \underline{S. Panichella}, C. V. Alexandru, C. A. Visaggio, G. Canfora.
+         \textbf{SURF: Summarizer of User Reviews Feedback}.  Demonstrations Track of the  \emph{39th International Conference on Software Engineering} (ICSE 2017). \textit{Core RANK: A*}. https://doi.org/10.1109/ICSE-C.2017.5
+         
+            
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived the idea behind the (original research) work and implemented with Andrea Di Sorbo and Carol Alexandru the SURF tool.}
+
+\item \label{mobile:2} F. Palomba, P. Salza, A. Ciurumelea,  \underline{S. Panichella}, H. Gall, F. Ferrucci,  A. De Lucia   \textbf{Recommending and Localizing Change Requestsfor Mobile Apps based on User Reviews}.     In: \emph{39th International Conference on Software Engineering} (ICSE 2017).  \\\textit{Core RANK: A*}. https://doi.org/10.1109/ICSE.2017.18 \\
+
+   
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived the idea behind the work (which consisted in a joint work between University of Salerno and University of Zurich) and 
+     advised Fabio Palomba, Pasquale Salsa and Adelina Ciurumelea  in designing and performing the experiments, analyzing the data. He also contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+         \item  \label{C4} Y. Zhou, R. Gu, T. Chen, Z. Huang,  \underline{S. Panichella}, H. Gall.   \textbf{Analyzing APIs Documentation and Code to Detect Directive Defects}.    In: \emph{39th International Conference on Software Engineering} (ICSE 2017). \\ \textit{Core RANK: A*}. https://doi.org/10.1109/ICSE.2017.11\\
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived with Yu Zhou (guest researcher at the UZH during the year 2016) the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+        
+       \item   \label{mobile:3}    A. Ciurumelea, A. Schaufelbuhl, \underline{S. Panichella}, Harald Gall. \textbf{ Analyzing Reviews and Code of Mobile Apps for better Release Planning}. In: \emph{Proceedings of the 24th IEEE International Conference on Software Analysis, Evolution, and Reengineering (SANER) 2017. Klagenfurt, Austria}. \\https://doi.org/10.1109/SANER.2017.7884612
+                
+                   
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived the idea behind the work and 
+     advised the work of Adelina Ciurumelea (his PhD student) and Andreas Schaufelbuhl (master student at the UZH). 
+     Thus, he advised them   in designing and performing the experiments, analyzing the data. He also contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+     
+                \item  \label{carol:1}   C. Alexandru,  \underline{S. Panichella}, Harald Gall. \textbf{Reducing Redundancies in Multi-Revision Code Analysis}. In: \emph{24th IEEE International Conference on Software Analysis, Evolution, and Reengineering  (SANER) 2017. Klagenfurt, Austria}. \\https://doi.org/10.1109/SANER.2017.7884617
+                
+                
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived with Carol Alexandru  (PhD student at the UZH) the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+
+                
+    \item \label{ardoc}  \underline{S. Panichella}, A. Di Sorbo, E. Guzman, C. Visaggio, G. Canfora, H. Gall.
+         \textbf{ARdoc: App Reviews Development Oriented Classifier}.  In: \emph{24th ACM SIGSOFT International Symposium on the Foundations of Software Engineering}  will be held in Seattle, WA, USA.  \textit{Core RANK: A*}. http://doi.acm.org/10.1145/2950290.2983938
+         
+         
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived the idea behind the (original research) work and implemented with Andrea Di Sorbo and Emitza Guzman the ARdoc tool.}
+
+
+
+      \item \label{fse:surf} A. Di Sorbo,  \underline{S. Panichella}, C. V. Alexandru, J. Shimagaki, C. A. Visaggio, G. Canfora, H. Gall.
+         \textbf{What Would Users Change in My App? Summarizing App
+Reviews for Recommending Software Changes}.  In: \emph{24th ACM SIGSOFT International Symposium on the Foundations of Software Engineering}  (FSE 2016)  will be held in Seattle, WA, USA.  \textit{Core RANK: A*}. http://doi.acm.org/10.1145/2950290.2950299
+
+
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived the idea behind the work and 
+     advised  Andrea Di Sorbo  and Carol Alexandru (PhD student at the UZH). 
+     Thus, he advised them   in designing and performing the experiments, analyzing the data. He also contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+                
+         \item \label{gecco:1} A. Panichella, C. Alexandru,  \underline{S. Panichella}, A. Bacchelli, H. Gall. \textbf{A Search-based Training Algorithm for Cost-aware Defect Prediction}.  \emph{25th International Conference on Genetic Algorithms (ICGA) and the 21st Annual Genetic Programming Conference (GP) (GECCO 2016)}.  Denver, Colorado, USA.  \textit{Core RANK: A}. http://doi.acm.org/10.1145/2908812.2908938
+        
+        
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived with Carol Alexandru  (PhD student at the UZH) and Annibale Panichella the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+
+        
+    \item \label{td}  \underline{S. Panichella}, A. Panichella, M. Bella, A. Zaidman, H. Gall. \textbf{The impact of test case summaries on bug fixing performance: An empirical investigation}. In: \emph{Proceedings of the 38th International Conference on Software Engineering} (ICSE 2016), Austin, TX.  \textit{Core RANK: A*}. http://doi.acm.org/10.1145/2884781.2884847
+
+    
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived with  the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+
+
+    \item  \label{deca2}  A. Di Sorbo, \underline{S. Panichella}, C. Visaggio, M. Di Penta, G. Canfora,  H. Gall. . \textbf{DECA: Development Emails Content Analyzer}. In: \emph{Proceedings of the 38th International Conference on Software Engineering} (ICSE 2016), Austin, TX.  \textit{Core RANK: A*}. http://doi.acm.org/10.1145/2889160.2889170
+    
+    
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived with Andrea Di Sorbo the idea behind the (original research) work and implemented with him the DECA tool.}
+
+    \item \label{thesis}  \underline{S. Panichella}. \textbf{Supporting Newcomers in Software Development Projects}. In: \emph{Proceedings of the 31st International Conference on Software Maintenance and Evolution} (ICSME 2015). Bremen, Germany.  \textit{Core RANK: A}. \\https://doi.org/10.1109/ICSM.2015.7332519
+
+        \item  \label{deca1} A. Di Sorbo, \underline{S. Panichella}, C. Visaggio, M. Di Penta, G. Canfora,  H. Gall. \textbf{Development Emails Content Analyzer: Intention Mining in Developer Discussions}. In: \emph{30th international conference on Automated Software Engineering} (ASE 2015).  Lincoln, Nebraska.  \textit{Core RANK: A}. \\https://doi.org/10.1109/ASE.2015.12
+        
+           
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived with Andrea Di Sorbo  the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+
+    \item  \label{mobile:4}     \underline{S. Panichella}, A. Di Sorbo, E. Guzman, C. Visaggio, G. Canfora, H. Gall. \textbf{How Can I Improve My App? Classifying User Reviews for Software Maintenance and Evolution}. In: \emph{Proceedings of the 31st International Conference on Software Maintenance and Evolution} (ICSME 2015). Bremen, Germany.  \textit{Core RANK: A}. \\https://doi.org/10.1109/ICSM.2015.7332474
+    
+    
+           
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+
+    \item \label{gerald} G. Schermann, M. Brandtner,  \underline{S. Panichella}, P. Leitner,  H. Gall. \textbf{Discovering Loners and Phantoms in Commit and Issue Data}. In: \emph{Proceedings of the 37th International Conference on Program Comprehension} (ICPC 2015). Firenze, Italy.  \textit{Core RANK: C}. \\https://doi.org/10.1109/ICPC.2015.10
+
+
+     \textit{\textbf{Paper contribution:} Gerald Schermann  and Martin Brandtner conceived the idea behind the work. Gerald and Martin, under the main supervision of Sebastiano Panichella and Philipp Leitner,   designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+
+
+    \item  \label{asat1} \underline{S. Panichella}, V. Arnaoudova, M. Di Penta, G. Antoniol. \textbf{Would Static Analysis Tools Help Developers with Code Reviews?}.  In: \emph{Proceedings of the 22nd International Conference on Software Analysis, Evolution and Reengineering} (SANER 2015). Montreal, Canada. \\https://doi.org/10.1109/SANER.2015.7081826
+
+
+           
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+\end{bibenum}
+
+\textbf{\\\underline{Conference Publications during the PhD experience:}}\\
+\begin{bibenum}
+     \item \label{icsme2014} \underline{S. Panichella}, G. Bavota, M. Di Penta, G. Canfora, G. Antoniol. \textbf{How Developers' Collaborations Identified from Different Sources Tell us About Code Changes}. In: \emph{Proceedings of the 30th International Conference on Software Maintenance and Evolution} (ICSME 2014). Victoria, Canada.  \textit{Core RANK: A}. \\https://doi.org/10.1109/ICSME.2014.47
+
+
+           
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+
+
+    \item \label{ase1} G. Bavota, \underline{S. Panichella}, N. Tsantalis, M. Di Penta, R. Oliveto, G. Canfora. \textbf{Recommending Refactorings based on Team Co-Maintenance Patterns.}. In: \emph{29th international conference on Automated Software Engineering} (ASE 2014). Vasteras, Sweden.  \textit{Core RANK: A}. http://doi.acm.org/10.1145/2642937.2642948
+    
+    
+           
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella with Gabriele Bavota conceived the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+
+
+    \item \label{codes} C. Vassallo, \underline{S. Panichella}, G. Canfora, M. Di Penta. \textbf{CODES: mining sourCe cOde Descriptions from developErs diScussions}. In: \emph{Proceedings of the 36th International Conference on Program Comprehension} (ICPC 2014). Hyderabad, India.  \textit{Core RANK: C}. http://doi.acm.org/10.1145/2597008.2597799
+
+
+  
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived the idea behind the (original research) work and implemented with Carmine Vassallo (Master student at the University of Sannio) the CODES tool.}
+
+
+
+    \item \label{emerging} \underline{S. Panichella}, G. Canfora, M. Di Penta, R. Oliveto. \textbf{How the Evolution of Emerging Collaborations Relates to Code Changes: an Empirical Study}. In: \emph{Proceedings of the 36th International Conference on Program Comprehension} (ICPC 2014). Hyderabad, India.  \textit{Core RANK: C}. http://doi.acm.org/10.1145/2597008.2597145
+    
+    
+           
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+
+
+    \item \label{apache1} G. Bavota, G. Canfora, M. Di Penta, R. Oliveto, \underline{S. Panichella}. \textbf{*The Evolution of Project Inter-Dependencies in a Software Ecosystem: the Case of Apache}. In: \emph{Proceedings of the 29th International Conference on Software Maintenance} (ICSM 2013). Eindhoven, Netherlands.  \textit{Core RANK: A}. \\https://doi.org/10.1109/ICSM.2013.39
+    
+    
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived with Gabriele Bavota the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+
+
+    \item \label{documentation} G. Bavota, G. Canfora, M. Di Penta, R. Oliveto, \underline{S. Panichella}. \textbf{*An Empirical Investigation on Documentation Usage Patterns in Maintenance Tasks}. In: \emph{Proceedings of the 29th International Conference on Software Maintenance} (ICSM 2013). Eindhoven, Netherlands.  \textit{Core RANK: A}. \\https://doi.org/10.1109/ICSM.2013.32
+
+
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived with Gabriele Bavota the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+
+
+    \item  \label{yoda} G. Canfora, M. Di Penta, S. Giannantonio, R. Oliveto,  \underline{S. Panichella}. \textbf{*YODA: Young and newcOmer Developer Assistant}. In: \emph{Proceedings of the 35th International Conference on Software Engineering} (ICSE 2013). San Francisco, CA, USA.  \textit{Core RANK: A*}. \\https://doi.org/10.1109/ICSE.2013.6606710
+    
+    
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived the idea behind the (original research) work and implemented with Stefano Giannantonio (Bachelor student at the University of Molise) the YODA tool.}
+
+
+
+
+     \item \label{multi1} G. Canfora, A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Multi-Objective Cross-Project Defect Prediction}. In: \emph{Proceedings of the 7th International Conference on Software Testing, Verification and Validation} (ICST 2013). Luxembourg.  \textit{Core RANK: A}. \\https://doi.org/10.1109/ICST.2013.38
+
+
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived with Annibale Panichella the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+
+
+
+     \item \label{mentoring}  G. Canfora, M. Di Penta, R. Oliveto,  \underline{S. Panichella}. \textbf{*Who is going to Mentor Newcomers in Open Source Projects?}. In: \emph{Proceedings of the 29th ACM SIGSOFT International Symposium on Foundations of Software Engineering} (FSE 2012). Cary, North Carolina, USA.  \textit{Core RANK: A*}. http://doi.acm.org/10.1145/2393596.2393647
+
+
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella  the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+
+
+     \item \label{codes1}  \underline{S. Panichella}, J. Aponte, M. Di Penta, A. Marcus, G. Canfora. \textbf{Mining source code descriptions from developer communications}. In: \emph{Proceedings of the 20th IEEE International Conference on Program Comprehension} (ICPC), 2012. Passau, Germany.  \textit{Core RANK: C}. \\https://doi.org/10.1109/ICPC.2012.6240510
+
+
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived  the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+     \item \label{labeling1}  \label{C26} A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Using IR Methods for Labeling Source Code Artifacts: Is It Worthwhile?}. In: \emph{Proceedings of the 20th IEEE International Conference on Program Comprehension} (ICPC), 2012. Passau, Germany.  \textit{Core RANK: C}. \\https://doi.org/10.1109/ICPC.2012.6240488
+     
+     
+                              
+     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived  the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. }
+     
+%     \item \label{filter1}  A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Improving IR-based Traceability Recovery Using Smoothing Filters}. In: \emph{Proceedings of the 19th IEEE International Conference on Program Comprehension} (ICPC) 2011. Kingston, ON, Canada.  \textit{Core RANK: C}. \\https://doi.org/10.1109/ICPC.2011.34
+%
+%
+%     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived  the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper.}
+
+\end{bibenum}
+
+%\textbf{\\\underline{Conference Publications during the bachelor and master studies:}}\\
+%\begin{bibenum}
+%    
+%        \item \label{noun1}  G. Capobianco, A. De Lucia, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*On the role of the nouns in IR-based traceability recovery}. In: \emph{Proceedings of the 19th IEEE International Conference on Program Comprehension} (ICPC) 2009. Vancouver, British Columbia, Canada.  \textit{Core RANK: C}. \\https://doi.org/10.1109/ICPC.2009.5090038
+%     
+%                            
+%     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived with Annibale Panichella the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. }
+%      
+%
+%     \item \label{wcre}  G. Capobianco, A. De Lucia, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Traceability Recovery Using Numerical Analysis}. In: \emph{Proceedings of the 16th IEEE Working Conference on Reverse Engineering} (WCRE) 2009. Lille, France.  \textit{Core RANK: B}. \\https://doi.org/10.1109/WCRE.2009.14
+%     
+%                            
+%     \textit{\textbf{Paper contribution:} Sebastiano Panichella conceived with Annibale Panichella the idea behind the work and designed and performed the experiments, analyzed the data, contributed to the reagents/materials/analysis tools, wrote the paper, prepared figures and/or tables, performed the computation work, reviewed drafts of the paper. }
+%     
+%\end{bibenum}
+
+
+\section{Talks Given}
+ 
+\begin{bibsection}
+\item \textbf{International Summer School on Software Engineering 2011}\\
+How identify Mentors in software projects?  \emph{July 2011}.
+
+\item \textbf{FSE 2012}\\
+Who is going to Mentor Newcomers in Open Source Projects?, \emph{November 2012}.
+
+\item \textbf{ICPC 2012}\\
+Mining source code descriptions from developer communications, \emph{June 2012}.
+
+\item \textbf{ICSE 2013}\\
+YODA: Young and newcOmer Developer Assistant, \emph{May 2013}.
+ 
+\item \textbf{ICSM 2013}\\
+Empirical Investigation on Documentation Usage Patterns in Maintenance Tasks, \emph{September}.
+
+\item \textbf{CSER 2013 - Concordia University downtown MontrÃ©al (http://concordia.ca)}\\
+Supporting Developers, Mining of Software Repositories, \emph{June}.
+
+\item \textbf{ICPC 2014}\\
+How the Evolution of Emerging Collaborations Relates to Code Changes: an Empirical Study, \emph{June}.
+
+\item \textbf{ICPC 2014}\\
+CODES: mining sourCe cOde Descriptions from developErs diScussions, \emph{June}.
+
+\item \textbf{ICMSE 2014}\\
+How Developers' Collaborations Identified from Different Sources Tell us About Code Changes, \emph{September}.
+
+\item \textbf{ASE 2014}\\
+Recommending Refactorings based on Team Co-Maintenance Patterns, \emph{September}.
+
+\item \textbf{SANER 2015}\\
+Would Static Analysis Tools Help Developers with Code Reviews? \emph{March}.
+
+\item \textbf{ICSME 2015}\\
+How Can I Improve My App? Classifying User Reviews for Software Maintenance and Evolution, \emph{October}.
+
+\item \textbf{ICSME 2015}\\
+Supporting Newcomers in Software Development Projects,  \emph{October}.
+
+\item \textbf{ASE 2015}\\
+Development Emails Content Analyzer: Intention Mining in Developer Discussions,  \emph{November}.
+
+\item \textbf{\href{http://www.lifl.fr/eosese/}{EOSESE 2015}}\\
+Textual Analysis or Natural Language Parsing? A Software Engineering Perspective,  \emph{December}.
+
+\item \textbf{``Adesso Quartalsmeeting" - 2016}\\
+Summarization Techniques for Code, Changes, and Testing,  \emph{February}.
+
+\item \textbf{Invited by Gran Sasso Science Institute, Center of Advanced Studies - 2016}\\
+Systematic Mining of Software Repositories,  \emph{July}.
+   
+\item \textbf{ICSE 2016}\\
+The Impact of Test Case Summaries on Bug Fixing Performance: An Empirical Investigation,  \emph{May}.
+
+\item \textbf{FSE 2016}\\
+ARdoc: App Reviews Development Oriented Classifier,  \emph{November}.
+
+\item \textbf{FSE 2016}\\
+What Would Users Change in My App? Summarizing App Reviews for Recommending Software Changes,  \emph{November}.
+
+\item \textbf{ICSE 2017}\\
+SURF: Summarizer of User Reviews Feedback.,  \emph{May}.
+
+\item \textbf{ICSE 2017}\\
+Analyzing APIs Documentation and Code to Detect Directive Defects,  \emph{May}.
+
+\item \textbf{VSS 2017}\\
+ Summarization Techniques for Code, Change, Testing and User Feedback \emph{December}.
+
+\item \textbf{VST (collocated with SANER 2018)}\\
+ Summarization Techniques for Code, Change, Testing and User Feedback \emph{March}.
+
+\end{bibsection}
+
+\section{Research Tools Implemented and Dataset Provided}
+
+\subsection{DATASET:} 
+A comprehensive and updated list of shared datasets (and implemented tools) to the research community by Sebastiano is available at\\ https://spanichella.github.io/tools.html: \\\\
+
+\subsection{TOOLS:} 
+
+\textbf{\href{https://spanichella.github.io/tools.html}{YODA}:}
+
+\href{https://spanichella.github.io/tools.html}{Yoda} (Young and newcOmer Developer Assistant) is an Eclipse plugin (available in \\\href{https://spanichella.github.io/tools.html}{https://spanichella.github.io/tools.html}) that identifies and recommends mentors for newcomers joining a software project. Yoda mines developers' communication (e.g., mailing lists) and project versioning systems to identify mentors using an approach inspired to what ArnetMiner does when mining advisor/student relations. Then, it recommends appropriate mentors based on the specific expertise required by the newcomer. \\\\
+ 
+\textbf{\href{https://spanichella.github.io/tools.html}{CODES}:}
+
+\href{https://spanichella.github.io/tools.html}{CODES} (mining sourCe cOde Descriptions from developErs diScussions) is an Eclipse plugin (available in \href{https://spanichella.github.io/tools.html}{https://spanichella.github.io/tools.html})  to automatically extract method descriptions of Java Systems from discussions in StackOverflow. Actually, CODES implements an approach defined in our previous work [2], that automatically extracts method descriptions from developers' communication. CODES considers as good descriptions paragraphs describing methods that obtained the higher score and allows developers to put the chosen description into the code as a Javadoc comment also becoming de facto an API description.
+\\\\
+\textbf{\href{https://spanichella.github.io/tools.html}{DECA:}}
+
+\href{https://spanichella.github.io/tools.html}{DECA} (Development Emails Content Analyzer) is a java tool (available in \\ \href{https://spanichella.github.io/tools.html}{https://spanichella.github.io/tools.html})  to automatically recognize natural language fragments in emails that are relevant in the software engineering domain. Actually, DECA implements an approach which allows to recognize most informative sentences for development purposes by exploiting a set of recurrent natural language patterns that developers often use in such communication channel. DECA purpose is to capture the intent of each informative sentence (requesting a new feature, description of a problem, or proposing a solution) and consequently to allow developers to better manage the information contained in emails.
+\\\\\
+\textbf{\href{https://spanichella.github.io/tools.html}{ARdoc:}}
+
+\href{https://spanichella.github.io/tools.html}{ARdoc} (App Reviews Development Oriented Classifier) is a Java tool that automatically recognizes natural language fragments in user reviews that are relevant for developers to evolve their applications. Specifically, natural language fragments are extracted according to a taxonomy of app reviews categories that are relevant to software maintenance and evolution. The categories were defined in our previous paper entitled \textit{``How Can I Improve My App? Classifying User Reviews for Software Maintenance and Evolution''}  and are: (i) Information Giving, (ii) Information Seeking, (iii) Feature Request and (iv) Problem Discovery. ARdoc implements an approach that merges three techniques: (1) Natural Language Processing, (2) Text Analysis and (3) Sentiment Analysis to automatically classify app reviews into the proposed categories. The purpose of ARdoc is to capture informative user reviews (requesting a new feature, description of a problem, or proposing a solution) and consequently to allow developers to better manage the information contained in user reviews.
+\\\\\
+
+\textbf{\href{https://spanichella.github.io/tools.html}{SURF:}}
+
+Continuous Delivery (CD) enables mobile developers to release small, high quality chunks of working software in a rapid manner.  However, faster delivery and a higher software quality do neither guarantee user satisfaction nor positive business outcomes. Previous work demonstrates that app reviews may contain crucial information that can guide developer's software maintenance efforts to obtain higher customer satisfaction. However, previous work also proves the difficulties encountered by developers in manually analyzing this rich source of data, namely (i) the huge amount of reviews an app may receive on a daily basis and (ii) the unstructured nature of their content. In this paper, we introduce  \href{https://spanichella.github.io/tools.html}{\textbf{SURF}}  (\textbf{S}ummarizer of \textbf{U}ser \textbf{R}eviews \textbf{F}eedback) a tool able to (i) analyze and classify the information contained in app reviews and (ii) distill actionable change tasks for improving mobile applications. Specifically, SURF performs a systematic summarization of thousands of user reviews through the generation of an interactive, structured and condensed agenda of recommended software changes. An end-to-end evaluation of SURF, involving  2622 reviews related to 12 different mobile applications, demonstrates the high accuracy of SURF in summarizing user reviews content. In evaluating our approach we also involve the original developers of some analyzed apps, who confirm the practical usefulness of the software changes recommended by SURF.\\
+
+\textbf{\href{https://spanichella.github.io/tools.html}{ChangeAdvisor}:}
+ChangeAdvisor is a tool for analysing, classifying and filtering mobile apps reviews. ChangeAdvisor is a tool we implemented that (i) examines the structure, semantics, and sentiments of user reviews to distill change requests to be addressed; (ii) then, it leverages information retrieval approaches to localize the code artifacts that need to be changed. The quantitative and qualitative evaluation of ChangeAdvisor, involving 10 open source mobile apps and their original developers, showed a high accuracy of the presented tool in (i) distilling and clustering user change requests and (ii) linking the source code components that need to be changed to accommodate such requests. In evaluating ChangeAdvisor we found that the original developers of the analyzed apps confirm the practical usefulness of the provided software change recommendations.\\
+
+\textbf{\href{https://spanichella.github.io/tools.html}{AUREA}:}
+AUREA is a tool for analysing, classifying and filtering mobile apps reviews. The tool implements the approach published at SANER
+2017 (in the paper \textit{Analyzing Reviews and Code of Mobile Apps for better Release Planning}) by the PhD student Adelina Ciurumelea.\\
+
+\href{https://spanichella.github.io/tools.html}{Yoda} (Young and newcOmer Developer Assistant) is an Eclipse plugin (available in \\\href{https://spanichella.github.io/tools.html}{https://spanichella.github.io/tools.html}) that identifies and recommends mentors for newcomers joining a software project. Yoda mines developers' communication (e.g., mailing lists) and project versioning systems to identify mentors using an approach inspired to what ArnetMiner does when mining advisor/student relations. Then, it recommends appropriate mentors based on the specific expertise required by the newcomer. \\\\
+
+
+\textbf{As anticipated before, in each publication we share the tools, datasets and all other data required for peforming the research. A comprehensive and updated list of the shared datasets and implemented tools shared to the research community are available at\\ https://spanichella.github.io/tools.html }\\\\
+
+%\hspace{-3cm}\vspace{-0.5cm}\begin{minipage}{1.25\linewidth}
+%I authorise the handling of my personal data pursuant to the Personal Data Protection Code â€“ Legislative Decree n. 196/2003.
+%
+%\blankline
+%
+%\blankline
+%
+%February 1st 2013.
+%\end{minipage}
+%\begin{figure}[h]
+%\hspace{-3cm}\includegraphics[width=0.25\linewidth]{sign.png}
+%\end{figure}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------%
+% The following is copyright and licensing information for
+% redistribution of this LaTeX source code; it also includes a liability
+% statement. If this source code is not being redistributed to others,
+% it may be omitted. It has no effect on the function of the above code.
+%----------------------------------------------------------------------%
+% Copyright (c) 2007, 2008, 2009, 2010, 2011 by Theodore P. Pavlic
+%
+% Unless otherwise expressly stated, this work is licensed under the
+% Creative Commons Attribution-Noncommercial 3.0 United States License. To
+% view a copy of this license, visit
+% http://creativecommons.org/licenses/by-nc/3.0/us/ or send a letter to
+% Creative Commons, 171 Second Street, Suite 300, San Francisco,
+% California, 94105, USA.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+% MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+% IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+% CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+% TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+% SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+%----------------------------------------------------------------------%

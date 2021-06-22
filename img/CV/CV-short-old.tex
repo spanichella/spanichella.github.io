@@ -1,0 +1,582 @@
+\documentclass[10pt]{article}
+\usepackage{calc}
+\usepackage{graphicx} 
+\reversemarginpar
+   
+\usepackage[paper=letterpaper, 
+            marginparwidth=1.2in, 
+            marginparsep=.05in, 
+            margin=1in,
+            includemp]{geometry}
+
+\setlength{\parindent}{0in}
+
+\usepackage[shortlabels]{enumitem}
+ 
+\makeatletter
+\newlength{\bibhang}
+\setlength{\bibhang}{1em}
+\newlength{\bibsep}
+ {\@listi \global\bibsep\itemsep \global\advance\bibsep by\parsep}
+\newlist{bibsection}{itemize}{3}
+\setlist[bibsection]{label=,leftmargin=\bibhang,%
+        itemindent=-\bibhang,
+        itemsep=\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\newlist{bibenum}{enumerate}{3}
+\setlist[bibenum]{label=[\arabic*],resume,leftmargin={\bibhang+\widthof{[999]}},%
+        itemindent=-\bibhang,
+        itemsep=\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\let\oldendbibenum\endbibenum
+\def\endbibenum{\oldendbibenum\vspace{-.6\baselineskip}}
+\let\oldendbibsection\endbibsection
+\def\endbibsection{\oldendbibsection\vspace{-.6\baselineskip}}
+\makeatother
+
+
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+%\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%
+       \parbox{4in}{\, \hfill %
+                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+%                    \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+
+
+\newcommand{\makeheading}[2][]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+             {\large \bfseries #2 \hfill #1}\\[-0.15\baselineskip]%
+                 \rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+\renewcommand{\section}[1]{\pagebreak[3]%
+    \vspace{1.3\baselineskip}%
+    \phantomsection\addcontentsline{toc}{section}{#1}%
+    \noindent\llap{\scshape\smash{\parbox[t]{\marginparwidth}{\hyphenpenalty=10000\raggedright #1}}}%
+    \vspace{-\baselineskip}\par}
+
+\newcommand*\fixendlist[1]{%
+    \expandafter\let\csname preFixEndListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixEndListend#1\endcsname\vspace{-0.6\baselineskip}}}
+
+\let\originalItem\item
+\newcommand*\fixouterlist[1]{%
+    \expandafter\let\csname preFixOuterList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\csname preFixOuterList#1\endcsname\let\oldItem\item\def\item{\pagebreak[2]\oldItem}}
+    \expandafter\let\csname preFixOuterListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\let\item\oldItem\csname preFixOuterListend#1\endcsname}}
+\newcommand*\fixinnerlist[1]{%
+    \expandafter\let\csname preFixInnerList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\let\oldItem\item\let\item\originalItem\csname preFixInnerList#1\endcsname}
+    \expandafter\let\csname preFixInnerListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixInnerListend#1\endcsname\let\item\oldItem}}
+ 
+\newlist{outerlist}{itemize}{3}
+    \setlist[outerlist]{label=\enskip\textbullet,leftmargin=*}
+    \fixendlist{outerlist}
+    \fixouterlist{outerlist}
+
+\newlist{lonelist}{itemize}{3}
+    \setlist[lonelist]{label=\enskip\textbullet,leftmargin=*,partopsep=0pt,topsep=0pt}
+    \fixendlist{lonelist}
+    \fixouterlist{lonelist}
+
+\newlist{innerlist}{itemize}{3}
+    \setlist[innerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixinnerlist{innerlist}
+
+\newlist{loneinnerlist}{itemize}{3}
+    \setlist[loneinnerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixendlist{loneinnerlist}
+    \fixinnerlist{loneinnerlist}
+
+\newcommand{\blankline}{\quad\pagebreak[3]}
+\newcommand{\halfblankline}{\quad\vspace{-0.5\baselineskip}\pagebreak[3]}
+
+\newcommand\doilink[1]{\href{http://dx.doi.org/#1}{#1}}
+\newcommand\doi[1]{doi:\doilink{#1}}
+
+\providecommand*\url[1]{\href{#1}{#1}}
+\renewcommand*\url[1]{\href{#1}{\texttt{#1}}}
+\providecommand*\email[1]{\href{mailto:#1}{#1}}
+\providecommand\BibTeX{{B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    \TeX}}
+\providecommand\Matlab{\textsc{Matlab}}
+\hyphenation{bio-mim-ic-ry bio-in-spi-ra-tion re-us-a-ble pro-vid-er}
+
+\begin{document}
+\makeheading{Sebastiano Panichella - Curriculum vitae}
+
+\newlength{\rcollength}\setlength{\rcollength}{1.85in}%
+\newlength{\spacewidth}\setlength{\spacewidth}{20pt}
+\newcommand\spacechar{$|$}
+
+
+\section{Biographical Sketch}
+
+Sebastiano Panichella received the PhD in Computer Science from the University of Sannio (Department of Engineering) in 2014 defending the thesis entitled  \href{http://www.ifi.uzh.ch/seal/people/panichella/Dissertation_Sebastiano_Panichella.pdf}{\textit{``Supporting Newcomers in Open Source Software Development Projects"}}. During the PhD his work was supervised by Prof. Gerardo Canfora and Prof. Massimiliano Di Penta 
+\\\\
+Currently he is a Research Associate at University of Zurich working in the \href{http://www.ifi.uzh.ch/seal.html}{Software Evolution and Architecture Lab} of Prof. Harald Gall. He is a member of IEEE. His research interests include Mining Software Repositories, Code Review, IR-based Traceability Recovery, Textual Analysis, Machine Learning (applied to SE problems), Software maintenance and evolution and Empirical Software Engineering.
+
+\blankline
+
+\section{Contact Information}
+%\textit{Address:} Department of Computer Engineering\\ \href{http://www.ing.unisannio.it/}{University of Sannio}\\
+%RCOST- Palazzo ex Poste, Via Traiano\\
+%82100 Benevento (Italy).\\\\
+%\textit{Mobile:} +39 3881969673\\
+%\textit{Tel.: +39 0824 305539} \\
+%\textit{E-mail:} \email{spanichella@gmail.com}\\
+%\textit{Home Page:} \href{http://www.ing.unisannio.it/spanichella}{www.ing.unisannio.it/spanichella}
+\textit{Address:} Department of Informatics\\ \href{http://www.uzh.ch/index_en.html}{University of Zurich}\\
+Binzmuhlestrasse 14\\
+CH-8050 Zurich, Switzerland.\\\\
+%\textit{Mobile:} +41 788864624\\
+%\textit{Tel.: +39 0824 305539} \\
+\textit{Tel +41 44 63 545 78 } \\
+\textit{E-mail:} \email{panichella@ifi.uzh.ch} (or alternatively \email{spanichella@gmail.com})\\
+\textit{Office BIN 2.D.03}\\
+\textit{Home Page:} \href{http://www.ifi.uzh.ch/seal/people/panichella.html}{www.ifi.uzh.ch/seal/people/panichella}
+%
+%\blankline
+%\section{Academic Experience and History}
+%
+%\href{http://www.ing.unisannio.it/}{\textbf{University of Sannio}}, Italy
+%\begin{outerlist}
+%\item[] PhD.,
+%        \href{http://www.ing.unisannio.it/}
+%             {Computer Engineering}, June/July 2014
+%        \begin{innerlist}
+%        %\bigsqcup
+%        \item Thesis Title: \emph{\href{http://www.ifi.uzh.ch/seal/people/panichella/Dissertation_Sebastiano_Panichella.pdf}{\textit{``Supporting Newcomers in Open Source Software Development Projects"}}}
+%        \item Advisers:
+%              \href{www.gerardocanfora.net/â€Ž}
+%                   {Prof. Gerardo Canfora} and
+%              \href{www.rcost.unisannio.it/mdipenta/}
+%                   {Prof. Massimiliano Di Penta}
+%        \item Thesis Topics: Supporting Developers, Mining of Software Repositories (Mailing lists, Issue trackers, Versioning Systems etc.)\\
+% \end{innerlist}
+%\end{outerlist}
+%
+%\href{http://www.unisa.it/}{\textbf{University of Salerno}}, Italy
+%\begin{outerlist}
+%\item[] M.S.,
+%        \href{http://www.unisa.it/facolta/scienze_mmffnn/index}
+%             {Computer Science}, December 2010
+%        \begin{innerlist}
+%        \item \emph{Magna cum Laude}
+%        \item Thesis Title: \emph{Improving IR-based Traceability Recovery Using Smoothing Filters}
+%        \item Adviser:
+%              \href{http://www.dmi.unisa.it/people/delucia/www/}
+%                   {Prof. Andrea De Lucia}
+%        \item Thesis Topics: Software Engineering, Traceability Recovery, Textual Analysis\\
+% \end{innerlist}
+%\end{outerlist}
+%
+%
+%\href{http://www.unimol.it/}{\textbf{University of Molise}}, Italy
+%\begin{outerlist}
+%
+%\item[] B.S.,
+%        \href{http://www.unimol.it/pls/unimolise/v3_s2ew_consultazione.mostra_pagina?id_pagina=51098}
+%             {Computer Science}, October 2008
+%        \begin{innerlist}
+%        \item \emph{Magna cum Laude}
+%        \item Thesis Title: \emph{Improving IR-based traceability recovery via noun-based indexing of software artifacts}
+%        \item Advisers:
+%              \href{http://docenti.unimol.it/index.php?u=giovanni.capobianco}
+%                   {Prof. Giovanni Capobianco},
+%              \href{http://www.distat.unimol.it/people/oliveto/Home.html}
+%                   {Dr Rocco Oliveto}
+%        \item Thesis Topics: Software Engineering, Traceability Management, Natural Language Processing (NLP)
+%        \end{innerlist}
+%
+%\end{outerlist} 
+
+\blankline
+{\footnotesize
+\section{Refereed Journal Publications}
+In papers marked with (*)  the authors are listed in alphabetic order. When such a rule is not followed, authors are listed by contribution.
+\begin{bibenum}
+\item G. Canfora, A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Defect Prediction as a Multi-Objective Optimization Problem}. \emph{Software Testing, Verification and Reliability (STVR)} 2015.\\
+    \doi{10.1002/stvr.1570}
+    
+    \item G. Bavota, G. Canfora, M. Di Penta, R. Oliveto, \underline{S. Panichella}. \textbf{*How the Apache Community Upgrades Dependencies}. \emph{Empirical Software Engineering (EMSE)} 2014.\\
+             \doi{10.1007/s10664-014-9325-9}
+             
+    \item A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Applying a Smoothing Filter to Improve IR-based Traceability Recovery Processes: An Empirical Investigation}. \emph{Information and Software Technology (INFSOF)} 2012.\\
+        \doi{10.1016/j.infsof.2012.08.002}
+
+    \item G. Capobianco, A. De Lucia, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Improving IR-based traceability recovery via noun-based indexing of software artifacts}. \emph{Journal of Software: Evolution and Process (JSE)} 2012.\\
+        \doi{10.1002/smr.1564}
+
+    \item A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Labeling Source Code with Information Retrieval Methods: An Empirical Study}. \emph{Empirical Software Engineering (EMSE)} 2013.
+                \doi{doi:10.1007/s10664-013-9285-5}
+        %       To Appear.\\
+\end{bibenum} 
+}
+
+%\section{Submitted Journal Publications}
+%\begin{bibenum}
+%     \item     \underline{S. Panichella}, M. Di Penta, Martin Brandtner, R. Oliveto,  G. Canfora, Harald Gall. \textbf{Recommending Mentors in Open Source Projects to Grow-Up Long Term Contributors}. In: \emph{IEEE Transactions on Software Engineering (TSE)}\\
+%\end{bibenum}
+
+
+%
+%\blankline   
+
+%\section{Submitted Journal Publications}
+%\begin{bibenum}
+%     \item     \underline{S. Panichella}, M. Di Penta, Martin Brandtner, R. Oliveto,  G. Canfora, Harald Gall. \textbf{Recommending Mentors in Open Source Projects to Grow-Up Long Term Contributors}. In: \emph{IEEE Transactions on Software Engineering (TSE)}\\
+%\end{bibenum} 
+ 
+\blankline
+{\footnotesize
+\section{Conference Publications}
+In papers marked with (*)  the authors are listed in alphabetic order. When such a rule is not followed, authors are listed by contribution.
+
+\begin{bibenum}
+      \item A. Di Sorbo,  \underline{S. Panichella}, C. V. Alexandru, J. Shimagaki, C. A. Visaggio, G. Canfora, H. Gall.
+         \textbf{What Would Users Change in My App? Summarizing App
+Reviews for Recommending Software Changes}.  In: \emph{24th ACM SIGSOFT International Symposium on the Foundations of Software Engineering}  will be held in Seattle, WA, USA
+         \item  A. Panichella, C. Alexandru,  \underline{S. Panichella}, A. Bacchelli, H. Gall. \textbf{A Search-based Training Algorithm for Cost-aware Defect Prediction}.  \emph{25th International Conference on Genetic Algorithms (ICGA) and the 21st Annual Genetic Programming Conference (GP) (GECCO 2016)}.  Denver, Colorado, USA.
+        
+    \item   \underline{S. Panichella}, A. Panichella, M. Bella, A. Zaidman, H. Gall. \textbf{The impact of test case summaries on bug fixing performance: An empirical investigation}. In: \emph{Proceedings of the 38th International Conference on Software Engineering} (ICSE 2016), Austin, TX.
+
+    \item    A. Di Sorbo, \underline{S. Panichella}, C. Visaggio, M. Di Penta, G. Canfora,  H. Gall. . \textbf{DECA: Development Emails Content Analyzer}. In: \emph{Proceedings of the 38th International Conference on Software Engineering} (ICSE 2016), Austin, TX.
+
+    \item   \underline{S. Panichella}. \textbf{Supporting Newcomers in Software Development Projects}. In: \emph{Proceedings of the 31st International Conference on Software Maintenance and Evolution} (ICSME 2015). Bremen, Germany.
+
+        \item  A. Di Sorbo, \underline{S. Panichella}, C. Visaggio, M. Di Penta, G. Canfora,  H. Gall. \textbf{Development Emails Content Analyzer: Intention Mining in Developer Discussions}. In: \emph{30th international conference on Automated Software Engineering} (ASE 2015).  Lincoln, Nebraska.
+
+    \item   \underline{S. Panichella}, A. Di Sorbo, E. Guzman, C. Visaggio, G. Canfora, H. Gall. \textbf{How Can I Improve My App? Classifying User Reviews for Software Maintenance and Evolution}. In: \emph{Proceedings of the 31st International Conference on Software Maintenance and Evolution} (ICSME 2015). Bremen, Germany.
+
+    \item  G. Schermann, M. Brandtner,  \underline{S. Panichella}, P. Leitner,  H. Gall. \textbf{Discovering Loners and Phantoms in Commit and Issue Data}. In: \emph{Proceedings of the 37th International Conference on Program Comprehension} (ICPC 2015). Firenze, Italy.
+
+    \item   \underline{S. Panichella}, V. Arnaoudova, M. Di Penta, G. Antoniol. \textbf{Would Static Analysis Tools Help Developers with Code Reviews?}.  In: \emph{Proceedings of the 22nd International Conference on Software Analysis, Evolution and Reengineering} (SANER 2015). Montreal, Canada.
+
+    \item  \underline{S. Panichella}, G. Bavota, M. Di Penta, G. Canfora, G. Antoniol. \textbf{How Developers' Collaborations Identified from Different Sources Tell us About Code Changes}. In: \emph{Proceedings of the 30th International Conference on Software Maintenance and Evolution} (ICSME 2014). Victoria, Canada.
+
+    \item  G. Bavota, \underline{S. Panichella}, N. Tsantalis, M. Di Penta, R. Oliveto, G. Canfora. \textbf{Recommending Refactorings based on Team Co-Maintenance Patterns.}. In: \emph{29th international conference on Automated Software Engineering} (ASE 2014). Vasteras, Sweden.
+
+    \item  C. Vassallo, \underline{S. Panichella}, G. Canfora, M. Di Penta. \textbf{CODES: mining sourCe cOde Descriptions from developErs diScussions}. In: \emph{Proceedings of the 36th International Conference on Program Comprehension} (ICPC 2014). Hyderabad, India.
+
+    \item  \underline{S. Panichella}, G. Canfora, M. Di Penta, R. Oliveto. \textbf{How the Evolution of Emerging Collaborations Relates to Code Changes: an Empirical Study}. In: \emph{Proceedings of the 36th International Conference on Program Comprehension} (ICPC 2014). Hyderabad, India.
+
+    \item  G. Bavota, G. Canfora, M. Di Penta, R. Oliveto, \underline{S. Panichella}. \textbf{*The Evolution of Project Inter-Dependencies in a Software Ecosystem: the Case of Apache}. In: \emph{Proceedings of the 29th International Conference on Software Maintenance} (ICSM 2013). Eindhoven, Netherlands.
+
+    \item  G. Bavota, G. Canfora, M. Di Penta, R. Oliveto, \underline{S. Panichella}. \textbf{*An Empirical Investigation on Documentation Usage Patterns in Maintenance Tasks}. In: \emph{Proceedings of the 29th International Conference on Software Maintenance} (ICSM 2013). Eindhoven, Netherlands.
+
+    \item  G. Canfora, M. Di Penta, S. Giannantonio, R. Oliveto,  \underline{S. Panichella}. \textbf{*YODA: Young and newcOmer Developer Assistant}. In: \emph{Proceedings of the 35th International Conference on Software Engineering} (ICSE 2013). San Francisco, CA, USA.
+
+     \item G. Canfora, A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Multi-Objective Cross-Project Defect Prediction}. In: \emph{Proceedings of the 7th International Conference on Software Testing, Verification and Validation} (ICST 2013). Luxembourg.
+
+     \item  G. Canfora, M. Di Penta, R. Oliveto,  \underline{S. Panichella}. \textbf{*Who is going to Mentor Newcomers in Open Source Projects?}. In: \emph{Proceedings of the 29th ACM SIGSOFT International Symposium on Foundations of Software Engineering} (FSE 2012). Cary, North Carolina, USA.
+
+     \item A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Using IR Methods for Labeling Source Code Artifacts: Is It Worthwhile?}. In: \emph{Proceedings of the 20th IEEE International Conference on Program Comprehension} (ICPC), 2012. Passau, Germany.
+
+     \item \underline{S. Panichella}, J. Aponte, M. Di Penta, A. Marcus, G. Canfora. \textbf{Mining source code descriptions from developer communications}. In: \emph{Proceedings of the 20th IEEE International Conference on Program Comprehension} (ICPC), 2012. Passau, Germany.
+
+     \item  A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Improving IR-based Traceability Recovery Using Smoothing Filters}. In: \emph{Proceedings of the 19th IEEE International Conference on Program Comprehension} (ICPC) 2011. Kingston, ON, Canada.
+
+     \item  G. Capobianco, A. De Lucia, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*On the role of the nouns in IR-based traceability recovery}. In: \emph{Proceedings of the 19th IEEE International Conference on Program Comprehension} (ICPC) 2009. Vancouver, British Columbia, Canada.
+
+     \item  G. Capobianco, A. De Lucia, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Traceability Recovery Using Numerical Analysis}. In: \emph{Proceedings of the 16th IEEE Working Conference on Reverse Engineering} (WCRE) 2009. Lille, France.
+\end{bibenum}
+}
+
+%\blankline
+
+%\section{Submitted Papers}
+%In papers marked with (*)  the authors are listed in alphabetic order. When such a rule is not followed, authors are listed by contribution.
+%\begin{bibenum}
+%      \item A. Di Sorbo,  \underline{S. Panichella}, C. V. Alexandru, J. Shimagaki, C. A. Visaggio, G. Canfora, H. Gall.
+%         \textbf{What Would Users Change in My App? Summarizing App
+%Reviews for Recommending Software Changes}.  In: \emph{24th ACM SIGSOFT International Symposium on the Foundations of Software Engineering}  will be held in Seattle, WA, USA
+%\end{bibenum}
+%
+%\blankline
+%
+%\section{Awards}
+% In papers marked with (*)  the authors are listed in alphabetic order. When such a rule is not followed, authors are listed by contribution.
+%\begin{enumerate}
+%\item \textbf{Best paper award}\\
+%A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Improving IR-based Traceability Recovery Using Smoothing Filters}. In: \emph{Proceedings of the 19th IEEE International Conference on Program Comprehension} (ICPC) 2011. Kingston, ON, Canada.
+%\item \textbf{Best tool award}\\
+% C. Vassallo, \underline{S. Panichella}, G. Canfora, M. Di Penta. \textbf{CODES: mining sourCe cOde Descriptions from developErs diScussions}. In: \emph{Proceedings of the 36th International Conference on Program Comprehension} (ICPC 2014). Hyderabad, India.
+%\end{enumerate}
+%
+%\section{Nominated as Best Paper}
+%In papers marked with (*)  the authors are listed in alphabetic order. When such a rule is not followed, authors are listed by contribution.
+%\begin{enumerate}
+%     \item  \underline{S. Panichella}, G. Bavota, M. Di Penta, G. Canfora, G. Antoniol. \textbf{How Developers' Collaborations Identified from Different Sources Tell us About Code Changes}. In: \emph{Proceedings of the 30th International Conference on Software Maintenance and Evolution} (ICSME 2014). Victoria, Canada.
+%     
+%    \item  \underline{S. Panichella}, G. Canfora, M. Di Penta, R. Oliveto. \textbf{How the Evolution of Emerging Collaborations Relates to Code Changes: an Empirical Study}. In: \emph{Proceedings of the 36th International Conference on Program Comprehension} (ICPC 2014). Hyderabad, India.
+%
+%    \item  G. Bavota, G. Canfora, M. Di Penta, R. Oliveto, \underline{S. Panichella}. \textbf{*The Evolution of Project Inter-Dependencies in a Software Ecosystem: the Case of Apache}. In: \emph{Proceedings of the 29th International Conference on Software Maintenance} (ICSM 2013). Eindhoven, Netherlands.
+%    
+%     \item G. Canfora, A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Multi-Objective Cross-Project Defect Prediction}. In: \emph{Proceedings of the 7th International Conference on Software Testing, Verification and Validation} (ICST 2013). Luxembourg.
+%
+%     \item A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Using IR Methods for Labeling Source Code Artifacts: Is It Worthwhile?}. In: \emph{Proceedings of the 20th IEEE International Conference on Program Comprehension} (ICPC), 2012. Passau, Germany.
+%
+%     \item  A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Improving IR-based Traceability Recovery Using Smoothing Filters}. In: \emph{Proceedings of the 19th IEEE International Conference on Program Comprehension} (ICPC) 2011. Kingston, ON, Canada.
+%\end{enumerate}
+%
+\blankline
+
+\section{Professional Services and Experiences}
+
+\textbf{Organising committee member of International Conferences:}
+\begin{innerlist}
+       \item \emph{\href{http://saner.aau.at/}
+                   {24th IEEE International Conference on Software Analysis, Evolution, and
+Reengineering (SANER 2017)}}, Klagenfurt, Austria.
+       \item \emph{\href{http://www2.unibas.it/icpc2017/call.html}
+                   {25th International Conference on Program Comprehension (ICPC 2017)}}, Buenos Aires, Argentina.
+    \item \emph{\href{}
+                   {38th International Conference on Software Engineering (ICSE 2016)}}, Austin, TX, May 14 - 22, 2016     
+                   
+    \item \emph{\href{http://2016.msrconf.org/\#/challenge}
+                   {13th International Conference on Mining Software Repositories (MSR 2016) - Mining Challenge}}, Austin, TX, May 14 - 15, 2016       
+                                                             
+   \item \emph{\href{http://www.program-comprehension.org/icpc16/}
+                   {24th International Conference on Program Comprehension (ICPC 2016)}}, Austin, TX, 2016.
+                   
+                      \item \emph{\href{http://paginas.fe.up.pt/~dsd-seaa-2015/seaa2015/}
+                   {42nd Euromicro Conference on Software Engineering and Advanced Applications (SEAA2016)}}, Limasol, Cyprus, August 31 - September 2, 2016
+                                      
+   \item \emph{\href{http://paginas.fe.up.pt/~dsd-seaa-2015/seaa2015/}
+                   {41st Euromicro Conference on Software Engineering and Advanced Applications (SEAA2015)}}, Funchal, Madeira, Portugal.
+                      \item \emph{\href{}
+                   {23rd International Conference on Program Comprehension (ICPC 2015)}}, Firenze, Italia.
+                                          
+   \item \emph{\href{}
+                   {22nd International Conference on Program Comprehension (ICPC 2014)}}, Hyderabad, India.\\            
+
+
+\end{innerlist}
+
+\textbf{Web Chair}
+\begin{innerlist}
+   \item \emph{
+              \href{http://icpc2014.usask.ca/â€Ž}
+                   {21st International Conference on Program Comprehension (ICPC 2013)}}, San Francisco, California, USA.\\
+\end{innerlist}
+
+
+\textbf{External Reviewer of Grant Applications}
+\begin{innerlist}
+   \item \emph{
+              \href{http://www.frqnt.gouv.qc.ca/accueil}
+                   {External Reviewer of projects submitted in the Quebec-Flanders bilateral research cooperation program}}
+\end{innerlist}
+
+\textbf{EU projects}
+\begin{innerlist}
+   \item \emph{
+              \href{€Žhttp://www.markosproject.eu/â€Ž}
+                   {Sebastiano Panichella partially funded with Gabriele Bavota, Gerardo Canfora, Massimiliano Di Penta, the EU FP7-ICT-2011-8 project Markos, contract no. 317743. Specifically, the MARKOS project is aimed to realize the prototype of a service and an interactive application providing an integrated view on the Open Source projects available the on web, focusing on functional, structural and licenses aspects of software code. My effort is focused on implementing relevant aspects of the Software System realized by Markos and and a generate new research results in the field of Software Engineering. Particular effort is spent on analysis of source code to study the evolution of software project to automatically extract reusable components from source code. From the other things I also extract licensing statements from the source code to monitor their evolution and avoid that changes in source code also generate the break of licenses.}}
+\end{innerlist}
+
+\textbf{SNF projects}
+\begin{innerlist}
+   \item \emph{
+              \href{€Ž€Ž}
+                   {Sebastiano Panichella funded the SURF-MobileAppsData SNF project. The goal of the SURF-MobileAppsData project is mining mobile apps data available in app stores to support software engineers in better supporting maintenance and evolution activities for these apps.}}
+\end{innerlist}
+
+\blankline
+
+\section{Professional Memberships}
+    \begin{innerlist}
+    \item IEEE Membership (2011--present)
+    \end{innerlist}
+
+\blankline
+ 
+\section{References} 
+
+\href 
+{http://www.ifi.uzh.ch/seal/people/gall.html€Ž}
+{\textbf{Harald C. Gall, Ph.D}}
+(e-mail: \href{mailto:gall@ifi.uzh.ch}{gall@ifi.uzh.ch}) 
+%
+\begin{innerlist}
+    \item Full Professor,
+        \href{http://www.uzh.ch/index_en.html}{University of Zurich}
+
+    \item[$\diamond$] Binzmuhlestrasse 14, CH-8050 Zurich (Switzerland).
+
+    \item[$\star$] \emph{Dr.~Gall, co-author (and advisor) of some publications at the University of Zurich.}
+\end{innerlist}
+
+\halfblankline
+
+\textbf{Giuliano Antoniol, Ph.D}
+(e-mail: \href{mailto:antoniol@ieee.org}{antoniol@ieee.org}) 
+%
+\begin{innerlist}
+    \item Professor,
+        \href{}{Ecole Polytechnique de Montreal}
+
+    %\item[$\diamond$] Binzmuhlestrasse 14, CH-8050 Zurich (Switzerland).
+
+    \item[$\star$] \emph{Dr.~Antoniol, co-author of some publications.}
+\end{innerlist}
+
+\halfblankline 
+
+
+\href
+{http://www.utdallas.edu/~amarcus/}
+{\textbf{Andrian Marcus, Ph.D}}
+(e-mail:~\href{mailto:amarcus@utdallas.edu}{amarcus@utdallas.edu}; phone:~(972-883-4246)
+%
+\begin{innerlist}
+    \item Associate Professor,
+        \href{http://www.utdallas.edu/}{University of Texas at Dallas}
+
+    \item[$\diamond$] 800 W. Campbell Road; MS EC31 Richardson, TX 75080 U.S.A.
+
+    \item[$\star$] \emph{Dr.~Marcus, member of dissertation committee and co-author of some publications.}
+\end{innerlist}
+
+\halfblankline
+
+\textbf{Andy Zaidman, Ph.D}
+(e-mail: \href{mailto:A.E.Zaidman@tudelft.nl}{A.E.Zaidman@tudelft.nl}) 
+%
+\begin{innerlist}
+    \item Professor,
+        \href{}{University of Delft}
+
+    %\item[$\diamond$] Binzmuhlestrasse 14, CH-8050 Zurich (Switzerland).
+
+    \item[$\star$] \emph{Dr.~Zaidman, co-author of some publications.}
+\end{innerlist}
+
+\halfblankline
+
+\href
+{http://www.rcost.unisannio.it/mdipenta/}
+{\textbf{ (Advisor During the PhD) Massimiliano Di Penta, Ph.D}}
+(e-mail: \href{mailto:dipenta@unisannio.it}{dipenta@unisannio.it})
+%
+\begin{innerlist}
+    \item Associate Professor,
+        \href{http://www.unisannio.it/}{University of Sannio}
+
+    \item[$\diamond$] Palazzo ex Poste, Via Traiano, I-82100 Benevento (Italy).
+
+    \item[$\star$] \emph{Dr. Di Penta, PhD adviser.}\\
+\end{innerlist}
+
+\halfblankline
+
+\href
+{www.gerardocanfora.net/â€Ž}
+{\textbf{ (Advisor During the PhD) Gerardo Canfora, Ph.D}}
+(e-mail: \href{mailto:canfora@unisannio.it}{canfora@unisannio.it})
+%
+\begin{innerlist}
+    \item Full Professor,
+        \href{http://www.unisannio.it/}{University of Sannio}
+
+    \item[$\diamond$] Palazzo ex Poste, Via Traiano, I-82100 Benevento (Italy).
+
+    \item[$\star$] \emph{Dr. Canfora, PhD adviser.}\\
+\end{innerlist}
+
+\halfblankline
+
+\href
+{http://www.dmi.unisa.it/people/delucia/www/}
+{\textbf{Andrea De Lucia, Ph.D}}
+(e-mail:~\href{mailto:adelucia@unisa.it}{adelucia@unisa.it}; phone:~+39 089963376)
+%
+\begin{innerlist}
+    \item Professor,
+        \href{http://www.unisa.it}{University of Salerno}
+
+    \item[$\diamond$] Via Giovanni Paolo II, 132 - 84084 Fisciano (SA), Italy.
+
+    \item[$\star$] \emph{Prof.~De Lucia, co-author of some publications.}
+\end{innerlist}
+
+
+\halfblankline
+
+\href
+{http://www.distat.unimol.it/people/oliveto/}
+{\textbf{Rocco Oliveto, Ph.D}}
+(e-mail:~\href{mailto:rocco.oliveto@unimol.it}{rocco.oliveto@unimol.it}; phone:~+39 0874 404123)
+%
+\begin{innerlist}
+    \item Assistant Professor,
+        \href{http://www.unimol.it}{University of Molise}
+
+    \item[$\diamond$] C.da Fonte Lappone - 86090 Pesche (IS), Italy.
+
+    \item[$\star$] \emph{Dr.~Oliveto, co-author of some publications.}
+\end{innerlist}
+
+
+\halfblankline
+\blankline
+
+
+%\hspace{-3cm}\vspace{-0.5cm}\begin{minipage}{1.25\linewidth}
+%I authorise the handling of my personal data pursuant to the Personal Data Protection Code â€“ Legislative Decree n. 196/2003.
+%
+%\blankline
+%
+%\blankline
+%
+%February 1st 2013.
+%\end{minipage}
+%\begin{figure}[h]
+%\hspace{-3cm}\includegraphics[width=0.25\linewidth]{sign.png}
+%\end{figure}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------%
+% The following is copyright and licensing information for
+% redistribution of this LaTeX source code; it also includes a liability
+% statement. If this source code is not being redistributed to others,
+% it may be omitted. It has no effect on the function of the above code.
+%----------------------------------------------------------------------%
+% Copyright (c) 2007, 2008, 2009, 2010, 2011 by Theodore P. Pavlic
+%
+% Unless otherwise expressly stated, this work is licensed under the
+% Creative Commons Attribution-Noncommercial 3.0 United States License. To
+% view a copy of this license, visit
+% http://creativecommons.org/licenses/by-nc/3.0/us/ or send a letter to
+% Creative Commons, 171 Second Street, Suite 300, San Francisco,
+% California, 94105, USA.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+% MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+% IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+% CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+% TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+% SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+%----------------------------------------------------------------------%
