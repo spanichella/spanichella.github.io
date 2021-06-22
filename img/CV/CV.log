@@ -1,7 +1,6 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.1.15)  31 JAN 2019 23:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.4.4)  22 JUN 2021 23:56
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
 **CV.tex
 (./CV.tex
@@ -282,7 +281,23 @@ Package hyperref Info: Option `breaklinks' set `true' on input line 125.
 \enitdp@innerlist=\count113
 \enitdp@loneinnerlist=\count114
 
-(./CV.aux)
+(./CV.aux
+
+LaTeX Warning: Label `Cm17' multiply defined.
+
+
+LaTeX Warning: Label `Cm5' multiply defined.
+
+
+LaTeX Warning: Label `Cm4' multiply defined.
+
+
+LaTeX Warning: Label `Cm3' multiply defined.
+
+
+LaTeX Warning: Label `Cm2' multiply defined.
+
+)
 \openout1 = `CV.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 190.
@@ -299,8 +314,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 190.
 LaTeX Font Info:    ... okay on input line 190.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 190.
 LaTeX Font Info:    ... okay on input line 190.
-
-(/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count115
 \scratchdimen=\dimen123
@@ -387,464 +401,357 @@ LaTeX Info: Redefining \nameref on input line 190.
 
 \rcollength=\skip61
 \spacewidth=\skip62
-LaTeX Font Info:    Try loading font information for U+msa on input line 206.
 
-(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 206.
-
-(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Underfull \hbox (badness 10000) in paragraph at lines 200--211
+Underfull \hbox (badness 10000) in paragraph at lines 200--201
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--211
+Underfull \hbox (badness 10000) in paragraph at lines 202--210
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--211
-
+Overfull \hbox (29.58186pt too wide) in paragraph at lines 214--215
+[][]\OT1/cmtt/m/n/10 cnax.servicelaboratory.ch[][]\OT1/cmr/m/n/10 , see the [][
+]blog-post ded-i-cated to the event[][]: https://bit.ly/2tNtEhk
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--211
+Underfull \hbox (badness 10000) in paragraph at lines 214--215
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 200--211
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 200--211
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 212--213
-
- []
-
-
-LaTeX Warning: Reference `LastPage' on page 1 undefined on input line 221.
-
-[1
-
-{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (22.58311pt too wide) in paragraph at lines 223--232
-\OT1/cmr/m/n/10 He su-per-vised (or co-supervised) 9 un-der-grad stu-dents, 5 M
-Sc stu-dents and cur-rently/recently
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 262--265
-
- []
-
-
-LaTeX Warning: Reference `C19' on page 2 undefined on input line 266.
-
-
-LaTeX Warning: Reference `C27' on page 2 undefined on input line 266.
-
-
-LaTeX Warning: Reference `C26' on page 2 undefined on input line 266.
-
-
-LaTeX Warning: Reference `J5' on page 2 undefined on input line 266.
-
-
-LaTeX Warning: Reference `C12' on page 2 undefined on input line 266.
-
-
-LaTeX Warning: Reference `C17' on page 2 undefined on input line 266.
-
-
-LaTeX Warning: Reference `C18' on page 2 undefined on input line 266.
-
-
-LaTeX Warning: Reference `C20' on page 2 undefined on input line 266.
-
-
-LaTeX Warning: Reference `C23' on page 2 undefined on input line 266.
-
-
-LaTeX Warning: Reference `C25' on page 2 undefined on input line 266.
-
-
-LaTeX Warning: Reference `C2' on page 2 undefined on input line 266.
-
-
-LaTeX Warning: Reference `C3' on page 2 undefined on input line 266.
-
-
-LaTeX Warning: Reference `C5' on page 2 undefined on input line 266.
-
-
-LaTeX Warning: Reference `C7' on page 2 undefined on input line 266.
-
-
-LaTeX Warning: Reference `C8' on page 2 undefined on input line 266.
-
-
-LaTeX Warning: Reference `C14' on page 2 undefined on input line 266.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 266--267
-
- []
-
-
-LaTeX Warning: Reference `LastPage' on page 2 undefined on input line 267.
-
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 268--271
-
- []
-
-
-LaTeX Warning: Reference `J2' on page 3 undefined on input line 272.
-
-
-LaTeX Warning: Reference `C21' on page 3 undefined on input line 272.
-
-
-LaTeX Warning: Reference `C16' on page 3 undefined on input line 273.
-
-
-LaTeX Warning: Reference `C17' on page 3 undefined on input line 273.
-
-
-LaTeX Warning: Reference `C20' on page 3 undefined on input line 273.
-
-
-LaTeX Warning: Reference `C22' on page 3 undefined on input line 274.
-
-
-LaTeX Warning: Reference `C10' on page 3 undefined on input line 274.
-
-
-LaTeX Warning: Reference `C22' on page 3 undefined on input line 274.
-
-
-LaTeX Warning: Reference `C16' on page 3 undefined on input line 274.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 272--276
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 277--280
-
- []
-
-
-LaTeX Warning: Reference `C16' on page 3 undefined on input line 281.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 281--283
-
- []
-
-
-LaTeX Warning: Reference `J3' on page 3 undefined on input line 287.
-
-
-LaTeX Warning: Reference `J4' on page 3 undefined on input line 287.
-
-
-LaTeX Warning: Reference `C28' on page 3 undefined on input line 287.
-
-
-LaTeX Warning: Reference `C29' on page 3 undefined on input line 287.
-
-
-LaTeX Warning: Reference `C30' on page 3 undefined on input line 287.
-
-
-LaTeX Warning: Reference `C2' on page 3 undefined on input line 287.
-
-
-LaTeX Warning: Reference `C3' on page 3 undefined on input line 287.
-
-
-LaTeX Warning: Reference `C5' on page 3 undefined on input line 287.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 284--289
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 284--289
-
- []
-
-
-LaTeX Warning: Reference `LastPage' on page 3 undefined on input line 289.
-
-[3]
-
-LaTeX Warning: Reference `C1' on page 4 undefined on input line 293.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 290--295
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 290--295
-
- []
-
-
-LaTeX Warning: Reference `C9' on page 4 undefined on input line 299.
-
-
-LaTeX Warning: Reference `J1' on page 4 undefined on input line 299.
-
-
-LaTeX Warning: Reference `J3' on page 4 undefined on input line 299.
-
-
-LaTeX Warning: Reference `C24' on page 4 undefined on input line 299.
-
-
-LaTeX Warning: Reference `C2' on page 4 undefined on input line 300.
-
-
-LaTeX Warning: Reference `C3' on page 4 undefined on input line 300.
-
-
-LaTeX Warning: Reference `C5' on page 4 undefined on input line 300.
-
-
-LaTeX Warning: Reference `C7' on page 4 undefined on input line 300.
-
-
-LaTeX Warning: Reference `C8' on page 4 undefined on input line 300.
-
-
-LaTeX Warning: Reference `C14' on page 4 undefined on input line 300.
-
-
-LaTeX Warning: Reference `C10' on page 4 undefined on input line 300.
-
-
-LaTeX Warning: Reference `Cm3' on page 4 undefined on input line 300.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 296--302
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 296--302
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 296--302
-
- []
-
-
-LaTeX Warning: Reference `C0' on page 4 undefined on input line 307.
-
-
-LaTeX Warning: Reference `Cm3' on page 4 undefined on input line 307.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 303--308
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 303--308
-
- []
-
-
-LaTeX Warning: Reference `LastPage' on page 4 undefined on input line 308.
-
-[4]
-
-Package hyperref Warning: Suppressing link with empty target on input line 315.
-
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 315--316
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 317--318
-
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 321.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 218.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 321.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 218.
+LaTeX Font Info:    Try loading font information for U+msa on input line 218.
 
-Underfull \hbox (badness 10000) in paragraph at lines 333--334
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 218.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
+
+{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 234--235
 
  []
 
 
-LaTeX Warning: Reference `LastPage' on page 5 undefined on input line 343.
+Underfull \hbox (badness 10000) in paragraph at lines 244--247
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 282--288
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 282--288
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 282--288
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 289--296
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 289--296
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 297--300
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 301--305
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--309
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 310--311
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 312--315
+
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 316--318
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 319--324
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 319--324
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 325--330
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 325--330
+
+ []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 348--349
+
+Package hyperref Warning: Suppressing link with empty target on input line 337.
+
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 337--339
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 375--378
+Underfull \hbox (badness 10000) in paragraph at lines 337--339
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--388
+Package hyperref Warning: Suppressing link with empty target on input line 340.
+
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 340--341
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--391
+Underfull \hbox (badness 10000) in paragraph at lines 342--343
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 393--395
+Underfull \hbox (badness 10000) in paragraph at lines 358--359
 
  []
 
 
-Overfull \hbox (13.57396pt too wide) in paragraph at lines 395--397
+Underfull \hbox (badness 10000) in paragraph at lines 373--374
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 401--404
+
+ []
+
+
+Overfull \hbox (6.19438pt too wide) in paragraph at lines 408--409
+[]\OT1/cmr/m/n/10 Valentina Lenar-duzzi, Jeremy Daly, An-to-nio Mar-tini, $[]$,
+ Damian
+ []
+
+
+Overfull \hbox (3.3749pt too wide) in paragraph at lines 411--412
+[]\OT1/cmr/m/n/10 Yu Zhou, Yanqi Su, Taolue Chen, Zhiqiu Huang, Har-ald Gall, $
+[]$:
+ []
+
+
+Overfull \hbox (12.12952pt too wide) in paragraph at lines 413--414
+\OT1/cmr/bx/n/10 Prac-tices in Con-tin-u-ous In-te-gra-tion\OT1/cmr/m/n/10 . \O
+T1/cmr/m/it/10 Em-pir-i-cal Soft-ware En-gi-neer-ing (EMSE)\OT1/cmr/m/n/10 . 
+ []
+
+
+Overfull \hbox (3.11105pt too wide) in paragraph at lines 414--415
+[]\OT1/cmr/m/n/10 Giovanni Grano, Christoph Laaber, An-ni-bale Panichella, and 
+$[]$:
+ []
+
+
+Overfull \hbox (2.58484pt too wide) in paragraph at lines 414--415
+\OT1/cmr/bx/n/10 Test-ing with Fewer Re-sources: An Adap-tive Ap-proach to Perf
+ormance-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 414--415
+
+ []
+
+
+Overfull \hbox (0.58647pt too wide) in paragraph at lines 415--416
+\OT1/cmr/bx/n/10 ware In-for-mal Doc-u-men-ta-tion\OT1/cmr/m/n/10 . \OT1/cmr/m/
+it/10 Trans-ac-tions on Soft-ware En-gi-neer-ing (TSE)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 415--416
+
+ []
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 416--417
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 418--419
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 420--422
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 426--428
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 430--432
+
+ []
+
+
+Overfull \hbox (13.57396pt too wide) in paragraph at lines 432--434
 \OT1/cmr/bx/n/10 Com-mu-nity Up-grades De-pen-den-cies\OT1/cmr/m/n/10 . \OT1/cm
 r/m/it/10 Em-pir-i-cal Soft-ware En-gi-neer-ing (EMSE)
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 406--408
+Underfull \hbox (badness 10000) in paragraph at lines 443--445
 
  []
 
 
-LaTeX Warning: Reference `LastPage' on page 6 undefined on input line 408.
-
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 426--429
+Underfull \hbox (badness 10000) in paragraph at lines 463--466
 
  []
-
-
-LaTeX Warning: Reference `LastPage' on page 7 undefined on input line 454.
-
-[7]
-
-LaTeX Warning: Reference `LastPage' on page 8 undefined on input line 481.
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 498--500
+Overfull \hbox (69.00008pt too wide) in paragraph at lines 468--469
+[]\OT1/cmr/m/n/10 Usman Ashraf, Christoph Mayr-Dorn, Atif Mashkoor, Alexan-der 
+Egyed, and $[]$:
+ []
+
+
+Overfull \hbox (12.44365pt too wide) in paragraph at lines 471--472
+[]$\OT1/cmr/m/n/10 , Danielle Gon-za-lez, Mehdi Mi-rakhorli: \OT1/cmr/bx/n/10 D
+eepTC-Enhancer:
+ []
+
+
+Overfull \hbox (10.90598pt too wide) in paragraph at lines 471--472
+\OT1/cmr/bx/n/10 Im-prov-ing the Read-abil-ity of Au-to-mat-i-cally Gen-er-ated
+ Tests. \OT1/cmr/m/it/10 IEEE/ACM
+ []
+
+
+Overfull \hbox (1.74992pt too wide) in paragraph at lines 474--475
+[]\OT1/cmr/m/n/10 Usman Ashraf, Christoph Mayr-Dorn, Alexan-der Egyed, and $[]$
+:
+ []
+
+[9]
+Overfull \hbox (13.90164pt too wide) in paragraph at lines 481--482
+[]\OT1/cmr/m/n/10 Diego Mar-tin, $[]$. \OT1/cmr/bx/n/10 The Cloud-i-fi-ca-tion 
+Per-spec-tives of Search-
+ []
+
+[10] [11]
+Underfull \hbox (badness 10000) in paragraph at lines 551--553
 
  []
 
 
-Overfull \hbox (0.94022pt too wide) in paragraph at lines 500--501
+Overfull \hbox (0.94022pt too wide) in paragraph at lines 553--554
 \OT1/cmr/m/it/10 ware Main-te-nance and Evo-lu-tion \OT1/cmr/m/n/10 (IC-SME 201
 4). Vic-to-ria, Canada. \OT1/cmr/m/it/10 Core RANK:
  []
 
-
-LaTeX Warning: Reference `LastPage' on page 9 undefined on input line 505.
-
-[9]
-Overfull \hbox (6.54306pt too wide) in paragraph at lines 507--509
+[12]
+Overfull \hbox (6.54306pt too wide) in paragraph at lines 560--562
 \OT1/cmr/bx/n/10 Emerg-ing Col-lab-o-ra-tions Re-lates to Code Changes: an Em-p
 ir-i-cal Study\OT1/cmr/m/n/10 .
  []
 
-
-LaTeX Warning: Reference `LastPage' on page 10 undefined on input line 530.
-
-[10]
-Underfull \hbox (badness 10000) in paragraph at lines 533--535
+[13]
+Underfull \hbox (badness 10000) in paragraph at lines 586--588
 
  []
 
 
-Overfull \hbox (11.06934pt too wide) in paragraph at lines 566--567
+Overfull \hbox (11.06934pt too wide) in paragraph at lines 619--620
 []\OT1/cmr/m/n/10 Harald C. Gall, Carol V. Alexan-dru, Adelina Ciu-rume-lea, Gi
 o-vanni Grano, Christoph
  []
 
-
-LaTeX Warning: Reference `LastPage' on page 11 undefined on input line 592.
-
-[11]
-Overfull \hbox (0.98746pt too wide) in paragraph at lines 607--608
+[14]
+Overfull \hbox (0.98746pt too wide) in paragraph at lines 666--667
 \OT1/cmr/bx/n/10 Emerg-ing Col-lab-o-ra-tions Re-lates to Code Changes: an Em-p
 ir-i-cal Study\OT1/cmr/m/n/10 .
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 634--635
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 688--689
 
  []
 
 
-LaTeX Warning: Reference `LastPage' on page 12 undefined on input line 642.
+Underfull \hbox (badness 10000) in paragraph at lines 694--695
 
-[12]
-
-Package hyperref Warning: Suppressing link with empty target on input line 660.
+ []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 699--701
 
-Package hyperref Warning: Suppressing link with empty target on input line 662.
-
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 664.
+ []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 707--709
 
-Package hyperref Warning: Suppressing link with empty target on input line 666.
-
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 694.
+ []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 713--715
 
-Package hyperref Warning: Suppressing link with empty target on input line 700.
-
-
-
-LaTeX Warning: Reference `LastPage' on page 13 undefined on input line 710.
-
-[13]
-
-Package hyperref Warning: Suppressing link with empty target on input line 714.
+ []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 719--720
 
-Package hyperref Warning: Suppressing link with empty target on input line 717.
+ []
 
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 717--718
+Underfull \hbox (badness 10000) in paragraph at lines 720--721
 
  []
 
@@ -852,775 +759,404 @@ Underfull \hbox (badness 10000) in paragraph at lines 717--718
 Package hyperref Warning: Suppressing link with empty target on input line 728.
 
 
+[16]
 
-Underfull \hbox (badness 10000) in paragraph at lines 734--735
+Package hyperref Warning: Suppressing link with empty target on input line 735.
 
- []
 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\UseRawInputEncoding ...tencodingname \@undefined 
-                                                  \let \DeclareFontEncoding@...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\default@M ->\def \accentclass@ 
-                                {7}
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-<argument> \@undefined 
-                       
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\UseRawInputEncoding ...tencodingname \@undefined 
-                                                  \let \DeclareFontEncoding@...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\default@M ->\def \accentclass@ 
-                                {7}
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-<argument> \@undefined 
-                       
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\UseRawInputEncoding ...tencodingname \@undefined 
-                                                  \let \DeclareFontEncoding@...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\default@M ->\def \accentclass@ 
-                                {7}
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-<argument> \@undefined 
-                       
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\UseRawInputEncoding ...tencodingname \@undefined 
-                                                  \let \DeclareFontEncoding@...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\default@M ->\def \accentclass@ 
-                                {7}
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-<argument> \@undefined 
-                       
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
-./CV.tex:741: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.741 ...rnal of Software: evolution and process}}
-                                                  .\\
-? 
 
-Underfull \hbox (badness 10000) in paragraph at lines 741--742
+Underfull \hbox (badness 10000) in paragraph at lines 735--736
 
  []
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 748.
-
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 748--749
+Underfull \hbox (badness 10000) in paragraph at lines 774--775
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 764--765
+Package hyperref Warning: Suppressing link with empty target on input line 786.
+
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 789.
+
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 789--790
+
+ []
+
+[17]
+Underfull \hbox (badness 10000) in paragraph at lines 807--808
 
  []
 
 
-Overfull \hbox (1.44318pt too wide) in paragraph at lines 769--770
-[]\OT1/cmr/m/n/10 31st IEEE/ACM In-ter-na-tional Con-fer-ence on Au-to-mated So
-ft-ware En-gi-neer-ing (ASE
+Package hyperref Warning: Suppressing link with empty target on input line 822.
+
+
+[18]
+Overfull \hbox (6.80437pt too wide) in paragraph at lines 859--864
+\OT1/cmr/bx/n/10 Total project fund-ing: \OT1/cmr/m/n/10 Se-bas-tiano Panichell
+a got di-rect fund-ing for around \OT1/cmr/bx/n/10 500,000
  []
 
 
-Overfull \hbox (3.0543pt too wide) in paragraph at lines 770--771
-[]\OT1/cmr/m/n/10 30th IEEE/ACM In-ter-na-tional Con-fer-ence on Au-to-mated So
-ft-ware En-gi-neer-ing (ASE
+Overfull \hbox (15.22214pt too wide) in paragraph at lines 868--871
+[]\OT1/cmr/m/n/10 Sebastiano Panichella ob-tained fund-ing (as co-applicant) fo
+r the SURF-MobileAppsData
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 771--772
+Overfull \hbox (3.28189pt too wide) in paragraph at lines 895--897
+[]\OT1/cmr/bx/n/10 CSER 2013 - Con-cor-dia Uni-ver-sity down-town Montr^^Seal (
+http://concordia.ca) 
+ []
+
+[19] [20]
+Overfull \hbox (1.55536pt too wide) in paragraph at lines 966--969
+\OT1/cmr/m/n/10 Requirements-Collector: Au-tomat-ing Re-quire-ments Spec-i-fi-c
+a-tion from Elic-i-ta-tion Ses-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 984--985
 
  []
 
-./CV.tex:779: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.779 ...da. Supervisor: Prof. Giuliano Antoniol}}
-                                                  
-? 
-./CV.tex:779: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.779 ...da. Supervisor: Prof. Giuliano Antoniol}}
-                                                  
-? 
-./CV.tex:779: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.779 ...da. Supervisor: Prof. Giuliano Antoniol}}
-                                                  
-? 
-./CV.tex:779: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.779 ...da. Supervisor: Prof. Giuliano Antoniol}}
-                                                  
-? 
-./CV.tex:779: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.779 ...da. Supervisor: Prof. Giuliano Antoniol}}
-                                                  
-? 
-./CV.tex:779: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.779 ...da. Supervisor: Prof. Giuliano Antoniol}}
-                                                  
-? 
-./CV.tex:779: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.779 ...da. Supervisor: Prof. Giuliano Antoniol}}
-                                                  
-? 
-./CV.tex:779: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.779 ...da. Supervisor: Prof. Giuliano Antoniol}}
-                                                  
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\UseRawInputEncoding ...tencodingname \@undefined 
-                                                  \let \DeclareFontEncoding@...
-l.796 }}
-        
-? 
-./CV.tex:796: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.796 }}
-        
-? 
-./CV.tex:796: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.796 }}
-        
-? 
-./CV.tex:796: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\default@M ->\def \accentclass@ 
-                                {7}
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-<argument> \@undefined 
-                       
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\UseRawInputEncoding ...tencodingname \@undefined 
-                                                  \let \DeclareFontEncoding@...
-l.796 }}
-        
-? 
-./CV.tex:796: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.796 }}
-        
-? 
-./CV.tex:796: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.796 }}
-        
-? 
-./CV.tex:796: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\default@M ->\def \accentclass@ 
-                                {7}
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-<argument> \@undefined 
-                       
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\UseRawInputEncoding ...tencodingname \@undefined 
-                                                  \let \DeclareFontEncoding@...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.796 }}
-        
-? 
-./CV.tex:796: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.796 }}
-        
-? 
-./CV.tex:796: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.796 }}
-        
-? 
-./CV.tex:796: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\default@M ->\def \accentclass@ 
-                                {7}
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-<argument> \@undefined 
-                       
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\UseRawInputEncoding ...tencodingname \@undefined 
-                                                  \let \DeclareFontEncoding@...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.796 }}
-        
-? 
-./CV.tex:796: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.796 }}
-        
-? 
-./CV.tex:796: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                     \endgroup 
-l.796 }}
-        
-? 
-./CV.tex:796: Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\default@M ->\def \accentclass@ 
-                                {7}
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-<argument> \@undefined 
-                       
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                    #4  \errhelp \@err@     ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \let \@err@               ...
-l.796 }}
-        
-? 
-./CV.tex:796: Undefined control sequence.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.796 }}
-        
-? 
-./CV.tex:796: Emergency stop.
-\GenericError  ...                                
-                                                  \@empty \def \MessageBreak...
-l.796 }}
-        
-End of file on the terminal!
 
- 
+Underfull \hbox (badness 10000) in paragraph at lines 986--989
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 990--992
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 993--995
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 996--998
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 999--1001
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1002--1004
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1005--1015
+
+ []
+
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 1016--1017
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1017--1018
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1018--1019
+
+ []
+
+
+Overfull \hbox (0.86328pt too wide) in paragraph at lines 1019--1024
+\OT1/cmr/m/it/10 - BE-CLoMA: Aug-ment-ing Stack Traces with User Re-view In-for
+-ma-tion \OT1/cmr/m/n/10 (SANER 2018). 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1019--1024
+
+ []
+
+
+Overfull \hbox (0.86328pt too wide) in paragraph at lines 1026--1031
+\OT1/cmr/m/it/10 - BE-CLoMA: Aug-ment-ing Stack Traces with User Re-view In-for
+-ma-tion \OT1/cmr/m/n/10 (SANER 2018). 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1043--1051
+
+ []
+
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 1054--1056
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1057--1058
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1058--1059
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1060--1061
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1062--1063
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1064--1067
+
+ []
+
+
+Overfull \hbox (0.86328pt too wide) in paragraph at lines 1068--1071
+\OT1/cmr/m/it/10 - BE-CLoMA: Aug-ment-ing Stack Traces with User Re-view In-for
+-ma-tion \OT1/cmr/m/n/10 (SANER 2018). 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1068--1071
+
+ []
+
+[23]
+Overfull \hbox (0.86328pt too wide) in paragraph at lines 1100--1102
+\OT1/cmr/m/it/10 - BE-CLoMA: Aug-ment-ing Stack Traces with User Re-view In-for
+-ma-tion \OT1/cmr/m/n/10 (SANER 2018). 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1100--1102
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1115--1120
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1122--1126
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1130--1135
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1130--1135
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1130--1135
+
+ []
+
+[24]
+Underfull \hbox (badness 10000) in paragraph at lines 1136--1137
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1138--1154
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1138--1154
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1155--1156
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1155--1156
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1157--1158
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1159--1160
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1161--1168
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1161--1168
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1169--1171
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1169--1171
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1176--1177
+
+ []
+
+[25]
+Underfull \hbox (badness 10000) in paragraph at lines 1189--1203
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1189--1203
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1189--1203
+
+ []
+
+
+! Package inputenc Error: Unicode character ​ (U+200B)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1212 ...tit{Learning Goals}:   The Languages ​
+                                                  ​and Grammars, JavaCC pa...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character ​ (U+200B)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1212 ...{Learning Goals}:   The Languages ​​
+                                                  and Grammars, JavaCC parse...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1205--1215
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1216--1221
+
+ []
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1240
+.
+
+[26]
+Underfull \hbox (badness 10000) in paragraph at lines 1268--1269
+
+ []
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1294
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1310
+.
+
+
+Overfull \hbox (35.21358pt too wide) in paragraph at lines 1321--1325
+[][][] \OT1/cmr/bx/n/10 (Ad-vi-sor Dur-ing the PhD) Mas-si-m-il-iano Di Penta, 
+Ph.D[][] \OT1/cmr/m/n/10 (e-mail: [][]dipenta@unisannio.it[][]) 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1330--1331
+
+ []
+
+
+AED: lastpage setting LastPage
+[27]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1385.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1385.
+ (./CV.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1385.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1385.
+
+Package rerunfilecheck Info: File `CV.out' has not changed.
+(rerunfilecheck)             Checksum: 37871B6EA1F830CDC7924B9FF3F1AA97;1313.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1385.
+ ) 
 Here is how much of TeX's memory you used:
- 7065 strings out of 492649
- 101078 string characters out of 6129622
- 219697 words of memory out of 5000000
- 10778 multiletter control sequences out of 15000+600000
- 10632 words of font info for 42 fonts, out of 8000000 for 9000
+ 7188 strings out of 492649
+ 102089 string characters out of 6129623
+ 211435 words of memory out of 5000000
+ 10843 multiletter control sequences out of 15000+600000
+ 11098 words of font info for 44 fonts, out of 8000000 for 9000
  1145 hyphenation exceptions out of 8191
- 28i,14n,43p,2357b,537s stack positions out of 5000i,500n,10000p,200000b,80000s
-./CV.tex:796:  ==> Fatal error occurred, no output PDF file produced!
+ 28i,13n,43p,1360b,466s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb
+></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
+></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
+usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr
+/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/lo
+cal/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local
+/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/
+texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/t
+exlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/te
+xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on CV.pdf (27 pages, 276512 bytes).
+PDF statistics:
+ 530 PDF objects out of 1000 (max. 8388607)
+ 483 compressed objects within 5 object streams
+ 147 named destinations out of 1000 (max. 500000)
+ 177 words of extra memory for PDF output out of 10000 (max. 10000000)
+
