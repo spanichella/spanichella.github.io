@@ -1,0 +1,707 @@
+\documentclass[10pt]{article}
+\usepackage{calc}
+\usepackage{graphicx} 
+\reversemarginpar
+   
+\usepackage[paper=letterpaper, 
+            marginparwidth=1.2in, 
+            marginparsep=.05in, 
+            margin=1in,
+            includemp]{geometry}
+
+\setlength{\parindent}{0in}
+
+\usepackage[shortlabels]{enumitem}
+% ============================================================
+%:Markup macros for proof-reading
+\usepackage{ifthen}
+\usepackage[normalem]{ulem} % for \sout
+\usepackage{xcolor}
+\newcommand{\ra}{$\rightarrow$}
+\newboolean{showedits}
+\setboolean{showedits}{true} % toggle to show or hide edits
+%\setboolean{showedits}{false} % toggle to show or hide edits
+\ifthenelse{\boolean{showedits}}
+{
+	\newcommand{\meh}[1]{\textcolor{red}{\uwave{#1}}} % please rephrase
+	\newcommand{\ins}[1]{\textcolor{blue}{\uline{#1}}} % please insert
+	\newcommand{\del}[1]{\textcolor{red}{\sout{#1}}} % please delete
+	\newcommand{\chg}[2]{\textcolor{red}{\sout{#1}}{\ra}\textcolor{blue}{\uline{#2}}} % please change
+	\newcommand{\nbe}[3]{
+		{\colorbox{#3}{\bfseries\sffamily\scriptsize\textcolor{white}{#1}}}
+		{\textcolor{#3}{\sf\small$\blacktriangleright$\textit{#2}$\blacktriangleleft$}}}
+}{
+	\newcommand{\meh}[1]{#1} % please rephrase
+	\newcommand{\ins}[1]{#1} % please insert
+	\newcommand{\del}[1]{} % please delete
+	\newcommand{\chg}[2]{#2}
+	\newcommand{\nbe}[3]{}
+}
+%
+\newcommand\rA[1]{\nbe{Reviewer A}{#1}{cyan}}
+\newcommand\rB[1]{\nbe{Reviewer B}{#1}{olive}}
+\newcommand\rC[1]{\nbe{Reviewer C}{#1}{magenta}}
+\newcommand\ANS[1]{\nbe{Response}{#1}{teal}}
+% ============================================================
+%:Put edit comments in a really ugly standout display
+%\usepackage{ifthen}
+\usepackage{amssymb}
+\newboolean{showcomments}
+\setboolean{showcomments}{true}
+%\setboolean{showcomments}{false}
+\newcommand{\id}[1]{$-$Id: scgPaper.tex 32478 2010-04-29 09:11:32Z oscar $-$}
+\newcommand{\yellowbox}[1]{\fcolorbox{gray}{yellow}{\bfseries\sffamily\scriptsize#1}}
+\newcommand{\triangles}[1]{{\sf\small$\blacktriangleright$\textit{#1}$\blacktriangleleft$}}
+\ifthenelse{\boolean{showcomments}}
+%{\newcommand{\nb}[2]{{\yellowbox{#1}\triangles{#2}}}
+{\newcommand{\nbc}[3]{
+ {\colorbox{#3}{\bfseries\sffamily\scriptsize\textcolor{white}{#1}}}
+ {\textcolor{#3}{\sf\small$\blacktriangleright$\textit{#2}$\blacktriangleleft$}}}
+ \newcommand{\version}{\emph{\scriptsize\id}}}
+{\newcommand{\nbc}[3]{}
+ \newcommand{\version}{}}
+\newcommand{\nb}[2]{\nbc{#1}{#2}{orange}}
+\newcommand{\here}{\yellowbox{$\Rightarrow$ CONTINUE HERE $\Leftarrow$}}
+\newcommand\rev[2]{\nb{TODO (rev #1)}{#2}} % reviewer comments
+\newcommand\fix[1]{\nb{FIX}{#1}}
+\newcommand\todo[1]{\nb{TO DO}{#1}}
+\newcommand\on[1]{\nbc{ON}{#1}{red}} % add more author macros here
+%\newcommand\XXX[1]{\nbc{XXX}{#1}{blue}}
+%\newcommand\XXX[1]{\nbc{XXX}{#1}{brown}}
+%\newcommand\XXX[1]{\nbc{XXX}{#1}{cyan}}
+%\newcommand\XXX[1]{\nbc{XXX}{#1}{darkgray}}
+%\newcommand\XXX[1]{\nbc{XXX}{#1}{gray}}
+%\newcommand\XXX[1]{\nbc{XXX}{#1}{magenta}}
+%\newcommand\XXX[1]{\nbc{XXX}{#1}{olive}}
+%\newcommand\XXX[1]{\nbc{XXX}{#1}{orange}}
+%\newcommand\XXX[1]{\nbc{XXX}{#1}{purple}}
+%\newcommand\XXX[1]{\nbc{XXX}{#1}{red}}
+%\newcommand\XXX[1]{\nbc{XXX}{#1}{teal}}
+%\newcommand\XXX[1]{\nbc{XXX}{#1}{violet}}
+% ============================================================
+
+
+\makeatletter
+\newlength{\bibhang}
+\setlength{\bibhang}{1em}
+\newlength{\bibsep}
+ {\@listi \global\bibsep\itemsep \global\advance\bibsep by\parsep}
+\newlist{bibsection}{itemize}{3}
+\setlist[bibsection]{label=,leftmargin=\bibhang,%
+        itemindent=-\bibhang,
+        itemsep=\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\newlist{bibenum}{enumerate}{3}
+\setlist[bibenum]{label=[\arabic*],resume,leftmargin={\bibhang+\widthof{[999]}},%
+        itemindent=-\bibhang,
+        itemsep=\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\let\oldendbibenum\endbibenum
+\def\endbibenum{\oldendbibenum\vspace{-.6\baselineskip}}
+\let\oldendbibsection\endbibsection
+\def\endbibsection{\oldendbibsection\vspace{-.6\baselineskip}}
+\makeatother
+
+
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+%\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%
+       \parbox{4in}{\, \hfill %
+                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+%                    \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+
+
+\newcommand{\makeheading}[2][]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+             {\large \bfseries #2 \hfill #1}\\[-0.15\baselineskip]%
+                 \rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+\renewcommand{\section}[1]{\pagebreak[3]%
+    \vspace{1.3\baselineskip}%
+    \phantomsection\addcontentsline{toc}{section}{#1}%
+    \noindent\llap{\scshape\smash{\parbox[t]{\marginparwidth}{\hyphenpenalty=10000\raggedright #1}}}%
+    \vspace{-\baselineskip}\par}
+
+\newcommand*\fixendlist[1]{%
+    \expandafter\let\csname preFixEndListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixEndListend#1\endcsname\vspace{-0.6\baselineskip}}}
+
+\let\originalItem\item
+\newcommand*\fixouterlist[1]{%
+    \expandafter\let\csname preFixOuterList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\csname preFixOuterList#1\endcsname\let\oldItem\item\def\item{\pagebreak[2]\oldItem}}
+    \expandafter\let\csname preFixOuterListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\let\item\oldItem\csname preFixOuterListend#1\endcsname}}
+\newcommand*\fixinnerlist[1]{%
+    \expandafter\let\csname preFixInnerList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\let\oldItem\item\let\item\originalItem\csname preFixInnerList#1\endcsname}
+    \expandafter\let\csname preFixInnerListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixInnerListend#1\endcsname\let\item\oldItem}}
+ 
+\newlist{outerlist}{itemize}{3}
+    \setlist[outerlist]{label=\enskip\textbullet,leftmargin=*}
+    \fixendlist{outerlist}
+    \fixouterlist{outerlist}
+
+\newlist{lonelist}{itemize}{3}
+    \setlist[lonelist]{label=\enskip\textbullet,leftmargin=*,partopsep=0pt,topsep=0pt}
+    \fixendlist{lonelist}
+    \fixouterlist{lonelist}
+
+\newlist{innerlist}{itemize}{3}
+    \setlist[innerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixinnerlist{innerlist}
+
+\newlist{loneinnerlist}{itemize}{3}
+    \setlist[loneinnerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixendlist{loneinnerlist}
+    \fixinnerlist{loneinnerlist}
+
+\newcommand{\blankline}{\quad\pagebreak[3]}
+\newcommand{\halfblankline}{\quad\vspace{-0.5\baselineskip}\pagebreak[3]}
+
+\newcommand\doilink[1]{\href{http://dx.doi.org/#1}{#1}}
+\newcommand\doi[1]{doi:\doilink{#1}}
+
+\providecommand*\url[1]{\href{#1}{#1}}
+\renewcommand*\url[1]{\href{#1}{\texttt{#1}}}
+\providecommand*\email[1]{\href{mailto:#1}{#1}}
+\providecommand\BibTeX{{B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    \TeX}}
+\providecommand\Matlab{\textsc{Matlab}}
+\hyphenation{bio-mim-ic-ry bio-in-spi-ra-tion re-us-a-ble pro-vid-er}
+
+\begin{document}
+\makeheading{Sebastiano Panichella - Research Output}
+
+\newlength{\rcollength}\setlength{\rcollength}{1.85in}%
+\newlength{\spacewidth}\setlength{\spacewidth}{20pt}
+\newcommand\spacechar{$|$}
+\blankline\\\blankline\\
+\blankline\\
+As follow are summarized my research outputs and my \textbf{contributions} to each of them.
+\blankline\\
+\blankline\\
+\blankline\\
+\blankline
+\section{Most Important  Publications}
+
+\begin{itemize}
+\item \underline{Sebastiano Panichella}, Andrea Di Sorbo, Emitza Guzman, Corrado Aaron Visaggio, Gerardo Canfora and Harald Gall:†How Can I Improve My App? Classifying User Reviews for Software Maintenance and Evolution†In Proceedings of the 31st International Conference on Software Maintenance and Evolution (ICSME 2015), Bremen, Germany.†\textbf{ Motivations:}†
+     \begin{itemize}
+     \item This paper was the first work i did on mobile computing, a topic I never worked on before at the UZH and proposed the idea of leveraging human inputs into the loop of software development. 
+\item It is my most cited paper
+\item On top of the idea of this paper I got two projects funded:
+		  \begin{itemize}
+    	 \item an SNF project called the SURF-MobileAppsData SNF (No. 200021\_166275) project, \\ \url{http://www.ifi.uzh.ch/en/seal/research/projects/SURF-MobileData.html} \\ 349,926 CHF
+ \item  an Innosuisse project called ARIES: Exploiting User Journeys and Testing Automation for Supporting Efficient Energy Service Platforms \\ \url{https://www.aries-devops.ch/index.html} \\ 500,000 CHF
+    	 \end{itemize} 
+     \end{itemize} 
+\item \underline{Sebastiano Panichella}, Annibale Panichella, Mauritz Bella, Andy Zaidman, and Harald Gall:†The impact of test case summaries on bug fixing performance: An empirical investigation.†In Proceedings of the 38th International Conference on Software Engineering, 2016.†\textbf{ Motivations:}†
+     \begin{itemize}
+     \item In the field of automated testing, I proposed the first work (ICSE 2016) that demonstrates that test case summaries have a high potential to boost developer's productivity during bug fixing tasks.
+     \item After this work I intensively worked more and more on test automation, with focus on AI and Cyber-physical systems.
+     \end{itemize} 
+\item Giovanni Grano, Christoph Laaber, Annibale Panichella, and \underline{Sebastiano Panichella}:††\\Testing with Fewer Resources: An Adaptive Approach to Performance-Aware Test Case Generation.††Transactions on Software Engineering (TSE) Journal, 2019. †\textbf{ Motivations:}†
+     \begin{itemize}
+     \item This paper was the first work I did on test case generation, a topic that is on the basis of my current research on AI and Cyber-physical systems.
+     \item On top of this and other works I got a project funded:
+		  \begin{itemize}
+    	 \item an H2020 project called COSMOS: DevOps for Complex Cyber-physical Systems, - https://www.cosmos-devops.org/ - 770,000 EUR
+    	 \end{itemize} 
+     \end{itemize} 
+
+     \item C. Vassallo, G. Schermann, F. Zampetti, D. Romano, P. Leitner, A. Zaidman, M. di Penta, \underline{S. Panichella}. A Tale of CI Build Failures: an Open Source and a Financial Organization Perspective.  \emph{Proceedings of the 33rd International Conference on Software Maintenance and Evolution}  (ICSME 2017).  †\textbf{ Motivations:}†
+     \begin{itemize}
+     \item This paper was the first work I did toward investigating DevOps challenges for traditional, AI and Cyber-physical systems. 
+
+     \item On top of this and other works I got a project funded:
+		  \begin{itemize}
+    	 \item an H2020 project called COSMOS: DevOps for Complex Cyber-physical Systems, - https://www.cosmos-devops.org/ - 770,000 EUR
+    	 \item  an Innosuisse project called ARIES: Exploiting User Journeys and Testing Automation for Supporting Efficient Energy Service Platforms \\ \url{https://www.aries-devops.ch/index.html} \\ 500,000 CHF
+    	 \end{itemize} 
+     \end{itemize}    
+  \item \underline{Sebastiano Panichella} and Nik Zaugg:  An Empirical Investigation of Relevant Changes and Automation Needs in Modern Code Review.   Empirical Software Engineering (EMSE) Journal. \\ \doi{https://link.springer.com/article/10.1007/s10664-019-09785-8}. †\textbf{ Motivations:}†
+     \begin{itemize}
+     \item This paper represents and important work I did to better understand system changes and automation needs of developers working on different types of software systems. This work represent a good basis on following studies where my research focused on understanding the system behavior and evolution as well as the actual developer's needs in different application domains.
+     \end{itemize} 
+\end{itemize}
+
+
+\newpage
+
+
+\section{Publications in peer-reviewed scientific journals}
+In papers marked with (*)  the authors are listed in alphabetic order. %When such a rule is not followed, authors are listed by contribution.
+\textbf{\\\underline{Journal Publications after the P.h.D.}}\\
+\begin{bibenum}
+\item \label{J16} Fiorella Zampetti, Saghan Mudbhari, Venera Arnaoudova, Massimiliano Di Penta, \underline{Sebastiano Panichella}, Giuliano Antoniol: Using Code Reviews to Automatically Configure Static Analysis Tools.    Empirical Software Engineering.  \doi{To Appear}. \textbf{Contributions:} Conceptualization, Methodology, Investigation, Validation, original draft \& editing.
+\item \label{J15} Pooja Ruhal, \underline{Sebastiano Panichella}, Manuel Leuenberger, Andrea Di Sorbo, and Oscar Nierstrasz: How to Identify Class Comment Types? A Multi-language Approach for Class Comment Classification. Journal of Systems and Software.  \doi{https://doi.org/10.1016/j.jss.2021.111047}.  \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+\item \label{J14} \underline{Sebastiano Panichella}, Gerardo Canfora, and Andrea Di Sorbo: "Won't We Fix this Issue?" Qualitative Characterization and Automated Identification of Wontfix Issues on Github. Information and Software Technology Journal. \\ \doi{https://doi.org/10.1016/j.infsof.2021.106665}.  \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+\item \label{J13}  Pooja Rani, \underline{Sebastiano Panichella}, Manuel Leuenberger, Mohammad Ghafari, Oscar Nierstrasz: What do class comments tell us? An investigation of comment evolution and practices in Pharo Smalltalk. Empirical Software Engineering. \\ \doi{https://doi.org/10.1007/s10664-021-09981-5}.  \textbf{Contributions:}  Data curation, Conceptualization, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+\item \label{J12}  Andrea Di Sorbo and \underline{Sebastiano Panichella}: Exposed! A Case Study on the Vulnerability-Proneness of Google Play Apps.    Empirical Software Engineering. \\ \doi{https://link.springer.com/article/10.1007/s10664-021-09978-0}.  \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration. 
+\item \label{J11}  Rafael Kallis, Andrea Di Sorbo, Gerardo Canfora, \underline{Sebastiano Panichella}: Predicting Issue Types on GitHub.  Journal of Science of Computer Programming.   \\ \doi{https://doi.org/10.1016/j.scico.2020.102598}.   \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+\item \label{J10}   Valentina Lenarduzzi, Jeremy Daly, Antonio Martini, \underline{Sebastiano Panichella}, Damian Andrew Tamburri: Towards a Technical Debt Conceptualization for Serverless Computing.   IEEE Software.   \\ \doi{https://ieeexplore.ieee.org/document/9222009}.  \textbf{Contributions:}   Conceptualization, Methodology, Investigation, Validation, Writing - original draft \& editing.
+\item \label{J09}  Andrea Di Sorbo, Giovanni Grano, Aaron Visaggio and \underline{Sebastiano Panichella}:  Investigating the Criticality of User Reported Issues through their Relations with App Rating.   Journal of Software: Evolution and Process (JSEP) Journal. \\ \doi{https://onlinelibrary.wiley.com/doi/abs/10.1002/smr.2316}.  \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+\item \label{J08}  \underline{Sebastiano Panichella} and Nik Zaugg:  An Empirical Investigation of Relevant Changes and Automation Needs in Modern Code Review.   Empirical Software Engineering (EMSE) Journal. \\ \doi{https://link.springer.com/article/10.1007/s10664-019-09785-8}.  \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration. 
+\item \label{J07} Yu Zhou, Yanqi Su, Taolue Chen, Zhiqiu Huang, Harald Gall, \underline{Sebastiano Panichella}:  User Review-Based Change File Localization for Mobile Applications.  Transactions on Software Engineering (TSE) Journal. \\ \doi{https://doi.org/10.1109/TSE.2020.2967383}.  \textbf{Contributions:}  Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+\item \label{J06} Fiorella Zampetti, Carmine Vassallo, \underline{Sebastiano Panichella}, Gerardo Canfora, Harald Gall, Massimiliano Di Penta:  \textbf{An Empirical Characterization of Bad Practices in Continuous Integration}.  \emph{Empirical Software Engineering (EMSE)}. \\ \doi{https://doi.org/10.1109/TSE.2019.2946773}.  \textbf{Contributions:}  Data curation, Conceptualization, Methodology, Investigation, Validation, Writing - editing.
+\item \label{J05} Giovanni Grano, Christoph Laaber, Annibale Panichella, and \underline{Sebastiano Panichella}:  \textbf{Testing with Fewer Resources: An Adaptive Approach to Performance-Aware Test Case Generation}.  \emph{Transactions on Software Engineering (TSE)}.  \\ \doi{https://doi.org/10.1109/TSE.2019.2946773}.  \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.\\
+\item \label{J04} A. Sorbo, \underline{S. Panichella},  Aaron Visaggio, Di Massimiliano Di Penta, Canfora Gerardo, and Harald Gall. \textbf{Exploiting Natural Language Structures in Software Informal Documentation}. \emph{Transactions on Software Engineering (TSE)} 2019. \\ \doi{https://doi.org/10.1109/TSE.2019.2930519}.  \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.\\
+\item \label{J03} C. Vassallo, \underline{S. Panichella}, F. Palomba, S. Proksch, Harald Gall, Andy Zaidman. \textbf{How Developers Engage with Static Analysis Tools in Different Contexts}. \emph{Empirical Software Engineering (EMSE)} 2019.\\ \doi{https://doi.org/10.1007/s10664-019-09750-5}.  \textbf{Contributions:}  Conceptualization,  Methodology, Investigation, Validation, Writing - original draft \& editing.\\
+    
+\item \label{J02} G.Grano, T. Titov, \underline{S. Panichella}, H. Gall: \textbf{Branch Coverage Prediction in Automated Testing}.  \emph{Journal of Software: Evolution and Process (JSEP) 2019}. \\ \doi{https://doi.org/10.1016/j.infsof.2019.05.005}.  \textbf{Contributions:}  Data curation, Conceptualization, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.\\
+
+\item \label{J0} C. Alexandru,  \underline{S. Panichella}, \underline{S. Proksch}, Harald Gall. \textbf{*Redundancy-free Analysis of Multi-revision Software Artifacts}. \emph{Empirical Software Engineering (EMSE)} 2019.\\
+    \doi{http://doi.acm.org/10.1145/3276954.3276960}.  \textbf{Contributions:}  Conceptualization, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.\\
+      \item \label{J01}  Y. Zhou and 
+   C. Wang and Y. Xin and T. Chen and \underline{S. Panichella} and H. Gall . \textbf{Automatic Detection and Repair Recommendation of Directive Defects in Java API Documentation}.  \emph{Transaction on Software Engineering 2018} - \\\url{https://ieeexplore.ieee.org/document/8478004}.  \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+\item \label{J1} G. Canfora, A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, \underline{S. Panichella}. \textbf{*Defect Prediction as a Multi-Objective Optimization Problem}. \emph{Software Testing, Verification and Reliability (STVR)} 2015.  \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.\\
+    \doi{10.1002/stvr.1570}\\
+  \end{bibenum}
+  
+  \textbf{\\\underline{Journal Publications during the PhD study:}}\\
+  \begin{bibenum}
+    \item \label{J2} G. Bavota, G. Canfora, M. Di Penta, R. Oliveto, S. Panichella. \textbf{*How the Apache Community Upgrades Dependencies}. \emph{Empirical Software Engineering (EMSE)} 2014.\\
+             \doi{10.1007/s10664-014-9325-9}.  \textbf{Contributions:}  Data curation, Conceptualization, Methodology, Investigation, Validation, Writing - original draft \& editing.
+             
+    \item \label{J3}  A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, S. Panichella. \textbf{*Applying a Smoothing Filter to Improve IR-based Traceability Recovery Processes: An Empirical Investigation}. \emph{Information and Software Technology (INFSOF)} 2012.  \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.\\
+        \doi{10.1016/j.infsof.2012.08.002}
+
+    \item \label{J5} A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, S. Panichella. \textbf{*Labeling Source Code with Information Retrieval Methods: An Empirical Study}. \emph{Empirical Software Engineering (EMSE)} 2013.
+                \doi{doi:10.1007/s10664-013-9285-5}.  \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+        %       To Appear.\\
+\end{bibenum} 
+
+  \textbf{\\\underline{Journal Publications during the master study:}}\\
+\begin{bibenum}
+    \item \label{J4}  G. Capobianco, A. De Lucia, R. Oliveto, A. Panichella, S. Panichella. \textbf{*Improving IR-based traceability recovery via noun-based indexing of software artifacts}. \emph{Journal of Software: Evolution and Process (JSE)} 2012.\\
+        \doi{10.1002/smr.1564}.  \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+\end{bibenum} 
+%\section{Submitted Journal Publications}
+%\begin{bibenum}
+%     \item     S. Panichella Harald Gall. \textbf{Recommending Mentors in Open Source Projects to Grow-Up Long Term Contributors}. In: \emph{JSEP}\\
+%\end{bibenum}
+
+%\blankline   
+
+
+ 
+\blankline
+
+\section{Peer-reviewed conference proceedings}
+In papers marked with (*)  the authors are listed in alphabetic order. %When such a rule is not followed, authors are listed by contribution.
+
+\textbf{\\\underline{Conference Publications after the Ph.D.:}}\\
+\begin{bibenum}
+ % 
+		\item \label{Cm24} Christian Birchler, Nicolas Ganz, Sajad Khatiri, Alessio Gambi and \underline{Sebastiano Panichella}:  \textbf{Cost-effective Simulation-based Test Selection in Self-driving Cars Software with SDC-Scissor.}  \emph{International Conference on Software Analysis, Evolution, and Reengineering 2022 (SANER)}.\\\textit{https://christianbirchler.github.io/sdc\_scissor\_demonstration\_paper.pdf}.   \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+  		\item \label{Cm23} Pooja Ruhal, Mathias Birrer, \underline{Sebastiano Panichella}, Mohammad Ghafari, and Oscar Nierstrasz:  \textbf{What do Developers Discuss about Code Comments?}  \emph{International Working Conference on Source Code Analysis and Manipulation 2021 (SCAM)} - \textit{10.1109/SCAM52516.2021.00027}.   \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+ 		\item \label{Cm22} Andrea Di Sorbo, Aaron Visaggio, Massimiliano Di Penta, Gerardo Canfora, \underline{Sebastiano Panichella}:  \textbf{An NLP-based Tool for Software Artifacts Analysis}  \emph{International Conference on Software Maintenance and Evolution} - \textit{10.1109/ICSME52107.2021.00058}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+ 		\item \label{Cm21} \underline{Sebastiano Panichella}, Alessio Gambi, Fiorella Zampetti, Vincenzo Riccio:  \textbf{SBST Tool Competition 2021}  \emph{International Conference on Software Engineering Workshops (ICSE 2021)} - \doi{10.1109/SBST52555.2021.00011}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+       \item \label{Cm20} \underline{Sebastiano Panichella}, Mohammad Imranur Rahman, and Davide Taibi:  \textbf{Structural Coupling for Microservices}  \emph{International Conference on Cloud Computing and Services Science (CLOSER 2021)}\\ \textit{https://www.scitepress.org/Link.aspx}\doi{10.5220/0010481902800287}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+       \item \label{Cm19} Usman Ashraf, Christoph Mayr-Dorn, Atif Mashkoor, Alexander Egyed, and \underline{Sebastiano Panichella}:  \textbf{Do Communities in Developer Interaction Networks align with Subsystem Developer Teams? An Empirical Study of Open Source Systems}  \emph{International Conference on Software and System Processes (ICSSP 2021)} - \textit{10.1109/ICSSP-ICGSE52873.2021.00016}.   \textbf{Contributions:} Conceptualization,  Methodology, Investigation, Validation, editing, Project administration.
+      \item \label{Cm17_2} Mathias Birrer, Pooja Ruhal, \underline{Sebastiano Panichella}, and Oscar Niestrasz:  \textbf{Makar: A Framework for Multi-source Studies based on Unstructured Data}  \emph{International Conference on Software Analysis, Evolution and Reengineering (SANER 2021)}\\ \textit{https://ieeexplore.ieee.org/document/9426063}.  \textbf{Contributions:}  Data curation, Conceptualization, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+      \item \label{Cm17} Annibale Panichella, Sebastiano Panichella, Gordon Fraser, Anand Ashok Sawant and Vincent Hellendoorn:  \textbf{Revisiting Test Smells in Automatically Generated Tests: Limitations, Pitfalls, and Opportunities}  \emph{International Conference on Software Maintenance and Evolution (ICSME 2020)} - \\\textit{https://ieeexplore.ieee.org/document/9240691}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+      \item \label{Cm16} Devjeet Roy, Ziyi Zhang, Maggie Ma, Venera Arnaoudova, Annibale Panichella,  Sebastiano Panichella, Danielle Gonzalez, Mehdi Mirakhorli:  DeepTC-Enhancer: Improving the Readability of Automatically Generated Tests.  \emph{IEEE/ACM International Conference on Automated Software Engineering} - \\\textit{https://ieeexplore.ieee.org/document/9285992}. 2020. \textbf{Contributions:}  Writing - original draft \& editing.      
+      \item \label{Cm15} Xavier Devroey, Sebastiano Panichella and Alessio Gambi:  \textbf{Java Unit Testing Tool Competition-Eighth Round.}.  \emph{IEEE/ACM 42nd International Conference on Software Engineering Workshops (ICSE 2020)} - \\\textit{https://dl.acm.org/doi/10.1145/3387940.3392265}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+      \item \label{Cm14} Sebastiano Panichella and Marcela Ruiz:  \textbf{Requirements-Collector: Automating Requirements Specification from Elicitation Sessions and User Feedback}.  \emph{IEEE International Requirements Engineering Conference (RE'20).} \\\textit{https://ieeexplore.ieee.org/abstract/document/9218156}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+      \item \label{Cm13} Usman Ashraf, Christoph Mayr-Dorn, Alexander Egyed, and Sebastiano Panichella:  \textbf{A Mixed Graph-Relational Dataset of Socio-technical interactions in Open Source Systems}.  \emph{Mining Software Repositories (MSR 2020).} - \\\textit{https://dl.acm.org/doi/10.1145/3379597.3387492}. \textbf{Contributions:}   Conceptualization, Methodology, Investigation, Writing - editing, Project administration.
+
+      \item \label{Cm12}  Muhammad Ilyas Azeem, Sebastiano Panichella, Andrea Di Sorbo, Alexander Serebrenik, and Qing Wang:  \textbf{Action-based Recommendation in Pull-request Development}.  \emph{International Conference on Software and System Processes (ICSSP 2020)} - \\\textit{https://dl.acm.org/doi/10.1145/3379177.3388904}. \textbf{Contributions:}  Data curation, Conceptualization,  Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+      \item \label{Cm11}  Rafael Kallis, Andrea Di Sorbo, Gerardo Canfora and Sebastiano Panichella:   ICSE 2019 - To Appear. \textbf{Ticket Tagger: Machine Learning Driven Issue Classification}.  \emph{35th IEEE International Conference on Software Maintenance and Evolution (ICSME 2019)} - \\\textit{https://doi.org/10.1109/ICSME.2019.00070}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+      \item \label{Cm10}  Y. Zhou, C. Wang, Y. Xin, T. Chen, Sebastiano Panichella, and H. Gall.:   ICSE 2019 - To Appear. \textbf{DRONE: A Tool to Detect and Repair Directive Defects in Java APIs Documentation}.  \emph{International Conference on Software Engineering, ICSE 2019} - \\\textit{https://ieeexplore.ieee.org/document/8802660}. \textbf{Contributions:}  Data curation, Conceptualization, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+      
+            \item \label{Cm9}  Diego Martin, Sebastiano Panichella. \textbf{The Cloudification Perspectives of Search-based Software Testing}.  \emph{The 12th Int. Workshop on Search-Based Software Testing, 2019} - \\\textit{https://doi.org/10.1109/SBST.2019.00009}. \textbf{Contributions:}  Data curation, Conceptualization,  Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+      \item \label{Cm8}  Carol V. Alexandru; Jose J. Merchante; Sebastiano Panichella; Sebastian Proksch; Harald C. Gall; Gregorio Robles. \textbf{On the Usage of Pythonic Idioms.}.  \emph{Onward! 2018} - \\\textit{http://doi.acm.org/10.1145/3276954.3276960}. \textbf{Contributions:}  Data curation, Conceptualization, Methodology, Investigation, Validation, Writing - editing, Project administration.
+
+      \item \label{Cm7}  S. Panichella. \textbf{Summarization Techniques for Code, Change, Testing and User Feedback.}.  \emph{Proceedings of the  {IEEE} 25th International Conference on Software Analysis, Evolution
+               and Reengineering}  (SANER 2018) - \\\textit{https://doi.org/10.1109/VST.2018.8327148}. \textbf{Contributions:}  Conceptualization, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+   \item \label{Cm6}  G. Grano, T. Titov, S. Panichella, H. Gall. \textbf{How High Will It Be? Using Machine Learning Models to Predict Branch Coverage in Automated Testing}.  \emph{MaLTeSQuE}  (collocated with SANER 2018) - \\\textit{https://doi.org/10.1109/MALTESQUE.2018.8368454}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+      \item \label{Cm5}  L. Pelloni, G. Grano, A. Ciurumelea, S. Panichella, F. Palomba, H. Gall. \textbf{BECLoMA: Augmenting Stack Traces with User Review Information.}.  \emph{Proceedings of the  {IEEE} 25th International Conference on Software Analysis, Evolution
+               and Reengineering}  (SANER 2018) - \\\textit{https://doi.org/10.1109/SANER.2018.8330252}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+      \item \label{Cm4} A. Ciurumelea, S. Panichella, H. Gall. \textbf{Automated User Reviews Analyser.}.  \emph{Proceedings of the  40th International Conference on Software Engineering}  (ICSE 2018) - \\\textit{http://doi.acm.org/10.1145/3183440.3194988}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+      \item \label{Cm3}  G. Grano, A. Ciurumelea, S. Panichella, F. Palomba, H. Gall. \textbf{ Exploring the Integration of User Feedback in Automated Testing of Android Applications.}.  \emph{Proceedings of the  {IEEE} 25th International Conference on Software Analysis, Evolution
+               and Reengineering}  (SANER 2018) - \\\textit{https://doi.org/10.1109/SANER.2018.8330198}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+
+      \item \label{Cm2}  C. Vassallo, S. Panichella, F. Palomba, S. Proksch, A. Zaidman and H. Gall. \textbf{Context is King: The Developer Perspective on the Usage of Static Analysis Tools.}.  \emph{Proceedings of the  {IEEE} 25th International Conference on Software Analysis, Evolution
+               and Reengineering}  (SANER 2018) - \\\textit{https://doi.org/10.1109/SANER.2018.8330195}. \textbf{Contributions:}  Data curation, Conceptualization, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+
+      \item \label{Cm1}  G. Grano, A. Di Sorbo, F. Mercaldo, C. Visaggio, G. Canfora, S. Panichella. \textbf{Android Apps and User Feedback: a Dataset for Software Evolution and Quality Improvement.}.  \emph{Proceedings of the  International Workshop on App Market Analytics}  (WAMA 2017). \\\textit{http://doi.acm.org/10.1145/3121264.3121266}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+      \item \label{C0}  C. Vassallo, G. Schermann, F. Zampetti, D. Romano, P. Leitner, A. Zaidman, M. di Penta, S. Panichella.
+         \textbf{A Tale of CI Build Failures: an Open Source and a Financial Organization Perspective.}.  \emph{Proceedings of the 33rd International Conference on Software Maintenance and Evolution}  (ICSME 2017).  \\\textit{https://doi.org/10.1109/ICSME.2017.67}. \textbf{Contributions:}  Data curation, Conceptualization, Methodology, Investigation, Validation, Writing -  editing, Project administration.
+         
+      \item \label{C1}  C. V. Alexandru, S. Panichella, Harald Gall.
+         \textbf{Replicating Parser Behavior using Neural Machine Translation}.  \emph{Proceedings of the 25th International Conference on Program Comprehension} (ICPC 2017).   \\\textit{https://doi.org/10.1109/ICPC.2017.11}. \textbf{Contributions:} Conceptualization,  Methodology, Investigation, Validation, Writing - editing, Project administration.
+
+      \item \label{C2}  A. Di Sorbo,  S. Panichella, C. V. Alexandru, C. A. Visaggio, G. Canfora.
+         \textbf{SURF: Summarizer of User Reviews Feedback}.  Demonstrations Track of the  \emph{39th International Conference on Software Engineering} (ICSE 2017). \\\textit{https://doi.org/10.1109/ICSE-C.2017.5}
+
+\item  \label{C3} F. Palomba, P. Salza, A. Ciurumelea,  S. Panichella, H. Gall, F. Ferrucci,  A. De Lucia   \textbf{Recommending and Localizing Change Requests for Mobile Apps based on User Reviews}.    In: \emph{39th International Conference on Software Engineering} (ICSE 2017).  \\\textit{https://doi.org/10.1109/ICSE.2017.18}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+         \item  \label{C4} Y. Zhou, R. Gu, T. Chen, Z. Huang,  S. Panichella, H. Gall.   \textbf{Analyzing APIs Documentation and Code to Detect Directive Defects}.    In: \emph{39th International Conference on Software Engineering} (ICSE 2017).   . \\\textit{https://doi.org/10.1109/ICSE.2017.11}. \textbf{Contributions:}  Data curation, Conceptualization, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+        
+       \item   \label{C5}    A. Ciurumelea, A. Schaufelbuhl, S. Panichella, Harald Gall. \textbf{ Analyzing Reviews and Code of Mobile Apps for better Release Planning}. In: \emph{Proceedings of the 24th IEEE International Conference on Software Analysis, Evolution, and Reengineering (SANER) 2017. Klagenfurt, Austria}. \\\textit{https://doi.org/10.1109/SANER.2017.7884612} \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+       
+                \item   \label{C6}    C. Alexandru,  S. Panichella, Harald Gall. \textbf{Reducing Redundancies in Multi-Revision Code Analysis}. In: \emph{24th IEEE International Conference on Software Analysis, Evolution, and Reengineering  (SANER) 2017. Klagenfurt, Austria}.  
+                \\\textit{https://doi.org/10.1109/SANER.2017.7884617} 
+             \textbf{Contributions:}  Conceptualization,  Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+              
+    \item  \label{C7}  S. Panichella, A. Di Sorbo, E. Guzman, C. Visaggio, G. Canfora, H. Gall.
+         \textbf{ARdoc: App Reviews Development Oriented Classifier}.  In: \emph{24th ACM SIGSOFT International Symposium on the Foundations of Software Engineering}  will be held in Seattle, WA, USA.   .
+          \\\textit{http://doi.acm.org/10.1145/2950290.2983938}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+  
+      \item  \label{C8}  A. Di Sorbo,  S. Panichella, C. V. Alexandru, J. Shimagaki, C. A. Visaggio, G. Canfora, H. Gall.
+         \textbf{What Would Users Change in My App? Summarizing App
+Reviews for Recommending Software Changes}.  In: \emph{24th ACM SIGSOFT International Symposium on the Foundations of Software Engineering}  will be held in Seattle, WA, USA.   \\\textit{http://doi.acm.org/10.1145/2950290.2950299}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+         \item  \label{C9}  A. Panichella, C. Alexandru,  S. Panichella, A. Bacchelli, H. Gall. \textbf{A Search-based Training Algorithm for Cost-aware Defect Prediction}.  \emph{25th International Conference on Genetic Algorithms (ICGA) and the 21st Annual Genetic Programming Conference (GP) (GECCO 2016)}.  Denver, Colorado, USA.   \\\textit{http://doi.acm.org/10.1145/2908812.2908938}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+        
+    \item  \label{C10}   S. Panichella, A. Panichella, M. Bella, A. Zaidman, H. Gall. \textbf{The impact of test case summaries on bug fixing performance: An empirical investigation}. In: \emph{Proceedings of the 38th International Conference on Software Engineering} (ICSE 2016), Austin, TX.   . \\\textit{http://doi.acm.org/10.1145/2884781.2884847}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+    \item   \label{C11}   A. Di Sorbo, S. Panichella, C. Visaggio, M. Di Penta, G. Canfora,  H. Gall. . \textbf{DECA: Development Emails Content Analyzer}. In: \emph{Proceedings of the 38th International Conference on Software Engineering} (ICSE 2016), Austin, TX.   . \\\textit{http://doi.acm.org/10.1145/2889160.2889170}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+    \item  \label{C12}   S. Panichella. \textbf{Supporting Newcomers in Software Development Projects}. In: \emph{Proceedings of the 31st International Conference on Software Maintenance and Evolution} (ICSME 2015). Bremen, Germany.   \\\textit{https://doi.org/10.1109/ICSM.2015.7332519}. \textbf{Contributions:}  Data curation, Conceptualization,  Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+        \item  \label{C13}  A. Di Sorbo, S. Panichella, C. Visaggio, M. Di Penta, G. Canfora,  H. Gall. \textbf{Development Emails Content Analyzer: Intention Mining in Developer Discussions}. In: \emph{30th international conference on Automated Software Engineering} (ASE 2015).  Lincoln, Nebraska.   \\\textit{https://doi.org/10.1109/ASE.2015.12}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+    \item  \label{C14}   S. Panichella, A. Di Sorbo, E. Guzman, C. Visaggio, G. Canfora, H. Gall. \textbf{How Can I Improve My App? Classifying User Reviews for Software Maintenance and Evolution}. In: \emph{Proceedings of the 31st International Conference on Software Maintenance and Evolution} (ICSME 2015). Bremen, Germany.   \\\textit{https://doi.org/10.1109/ICSM.2015.7332474}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+    \item  \label{C15}  G. Schermann, M. Brandtner,  S. Panichella, P. Leitner,  H. Gall. \textbf{Discovering Loners and Phantoms in Commit and Issue Data}. In: \emph{Proceedings of the 37th International Conference on Program Comprehension} (ICPC 2015). Firenze, Italy.    \\\textit{https://doi.org/10.1109/ICPC.2015.10}. \textbf{Contributions:}  Conceptualization, Methodology, Investigation, Validation, Writing - editing, Project administration.
+
+
+    \item   \label{C16}  S. Panichella, V. Arnaoudova, M. Di Penta, G. Antoniol. \textbf{Would Static Analysis Tools Help Developers with Code Reviews?}.  In: \emph{Proceedings of the 22nd International Conference on Software Analysis, Evolution and Reengineering} (SANER 2015). Montreal, Canada. \\\textit{https://doi.org/10.1109/SANER.2015.7081826}  \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+\end{bibenum}
+
+\textbf{\\\underline{Conference Publications during the PhD experience:}}\\
+\begin{bibenum}
+    \item  \label{C17}  S. Panichella, G. Bavota, M. Di Penta, G. Canfora, G. Antoniol. \textbf{How Developers' Collaborations Identified from Different Sources Tell us About Code Changes}. In: \emph{Proceedings of the 30th International Conference on Software Maintenance and Evolution} (ICSME 2014). Victoria, Canada.   \\\textit{https://doi.org/10.1109/ICSME.2014.47}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+    \item  \label{C18}  G. Bavota, S. Panichella, N. Tsantalis, M. Di Penta, R. Oliveto, G. Canfora. \textbf{Recommending Refactorings based on Team Co-Maintenance Patterns.}. In: \emph{29th international conference on Automated Software Engineering} (ASE 2014). Vasteras, Sweden.  
+    \\\textit{https://doi.org/10.1109/ICSE.2017.18}. \textbf{Contributions:}  Data curation, Conceptualization, Methodology, Investigation, Validation, Writing - editing, Project administration.
+
+    \item  \label{C19}  C. Vassallo, S. Panichella, G. Canfora, M. Di Penta. \textbf{CODES: mining sourCe cOde Descriptions from developErs diScussions}. In: \emph{Proceedings of the 36th International Conference on Program Comprehension} (ICPC 2014). Hyderabad, India.    \\\textit{http://doi.acm.org/10.1145/2597008.2597799}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+    \item  \label{C20}  S. Panichella, G. Canfora, M. Di Penta, R. Oliveto. \textbf{How the Evolution of Emerging Collaborations Relates to Code Changes: an Empirical Study}. In: \emph{Proceedings of the 36th International Conference on Program Comprehension} (ICPC 2014). Hyderabad, India.   
+    \\\textit{http://doi.acm.org/10.1145/2597008.2597145}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+    \item  \label{C21}  G. Bavota, G. Canfora, M. Di Penta, R. Oliveto, S. Panichella. \textbf{*The Evolution of Project Inter-Dependencies in a Software Ecosystem: the Case of Apache}. In: \emph{Proceedings of the 29th International Conference on Software Maintenance} (ICSM 2013). Eindhoven, Netherlands.  
+\\\textit{https://doi.org/10.1109/ICSM.2013.39}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+    \item  \label{C22}  G. Bavota, G. Canfora, M. Di Penta, R. Oliveto, S. Panichella. \textbf{*An Empirical Investigation on Documentation Usage Patterns in Maintenance Tasks}. In: \emph{Proceedings of the 29th International Conference on Software Maintenance} (ICSM 2013). Eindhoven, Netherlands.  
+    \\\textit{https://doi.org/10.1109/ICSM.2013.32}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+    \item  \label{C23}  G. Canfora, M. Di Penta, S. Giannantonio, R. Oliveto,  S. Panichella. \textbf{*YODA: Young and newcOmer Developer Assistant}. In: \emph{Proceedings of the 35th International Conference on Software Engineering} (ICSE 2013). San Francisco, CA, USA.   . \\\textit{https://doi.org/10.1109/ICSE.2013.6606710}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+     \item  \label{C24}  G. Canfora, A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, S. Panichella. \textbf{*Multi-Objective Cross-Project Defect Prediction}. In: \emph{Proceedings of the 7th International Conference on Software Testing, Verification and Validation} (ICST 2013). Luxembourg.  
+     \\\textit{https://doi.org/10.1109/ICST.2013.38}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+     \item   \label{C25}  G. Canfora, M. Di Penta, R. Oliveto,  S. Panichella. \textbf{*Who is going to Mentor Newcomers in Open Source Projects?}. In: \emph{Proceedings of the 29th ACM SIGSOFT International Symposium on Foundations of Software Engineering} (FSE 2012). Cary, North Carolina, USA.   . \\\textit{http://doi.acm.org/10.1145/2393596.2393647}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+     \item  \label{C26} A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, S. Panichella. \textbf{*Using IR Methods for Labeling Source Code Artifacts: Is It Worthwhile?}. In: \emph{Proceedings of the 20th IEEE International Conference on Program Comprehension} (ICPC), 2012. Passau, Germany.   
+     \\\textit{https://doi.org/10.1109/ICPC.2012.6240488}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+     \item  \label{C27}  S. Panichella, J. Aponte, M. Di Penta, A. Marcus, G. Canfora. \textbf{Mining source code descriptions from developer communications}. In: \emph{Proceedings of the 20th IEEE International Conference on Program Comprehension} (ICPC), 2012. Passau, Germany.   
+     \\\textit{https://doi.org/10.1109/ICPC.2012.6240510}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+     \item  \label{C28}  A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, S. Panichella. \textbf{*Improving IR-based Traceability Recovery Using Smoothing Filters}. In: \emph{Proceedings of the 19th IEEE International Conference on Program Comprehension} (ICPC) 2011. Kingston, ON, Canada.    \\\textit{https://doi.org/10.1109/ICPC.2011.34}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+\end{bibenum}
+
+\textbf{\\\underline{Conference Publications during the bachelor and master studies:}}\\
+\begin{bibenum}
+     \item  \label{C29}  G. Capobianco, A. De Lucia, R. Oliveto, A. Panichella, S. Panichella. \textbf{*On the role of the nouns in IR-based traceability recovery}. In: \emph{Proceedings of the 19th IEEE International Conference on Program Comprehension} (ICPC) 2009. Vancouver, British Columbia, Canada.   
+\\\textit{https://doi.org/10.1109/ICPC.2009.5090038}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+
+     \item  \label{C30}  G. Capobianco, A. De Lucia, R. Oliveto, A. Panichella, S. Panichella. \textbf{*Traceability Recovery Using Numerical Analysis}. In: \emph{Proceedings of the 16th IEEE Working Conference on Reverse Engineering} (WCRE) 2009. Lille, France.   \\ \textit{https://doi.org/10.1109/WCRE.2009.14}. \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+     
+\end{bibenum}
+
+
+%\blankline
+
+%\section{Submitted Papers}
+%In papers marked with (*)  the authors are listed in alphabetic order. When such a rule is not followed, authors are listed by contribution.
+%\begin{bibenum}
+%      \item A. Di Sorbo,  S. Panichella, C. V. Alexandru, J. Shimagaki, C. A. Visaggio, G. Canfora, H. Gall.
+%         \textbf{What Would Users Change in My App? Summarizing App
+%Reviews for Recommending Software Changes}.  In: \emph{24th ACM SIGSOFT International Symposium on the Foundations of Software Engineering}  will be held in Seattle, WA, USA
+%\end{bibenum}
+
+%\section{Submitted Papers}
+%\begin{bibenum}
+    %     \item S. Panichella, H. Gall.       \textbf{Summarization Techniques for Code, Changes, and Testing}.  Technical Briefing proposal at  the  \emph{39th International Conference on Software Engineering} (ICSE 2017).
+      
+%                              \item C. Vassallo, F. Zampetti, D. Romano,  S. Panichella, M. Di Penta and A. Zaidman  \textbf{What Types of Build Failures Stop Continuous Delivery? An Empirical Study at ING NL}.    In: \emph{39th International Conference on Software Engineering} (ICSE 2017).
+ 
+
+%\end{bibenum} 
+
+\blankline
+
+\section{Book chapters:}
+\begin{enumerate}
+\item Harald C. Gall, Carol V. Alexandru, Adelina Ciurumelea, Giovanni Grano, Christoph Laaber, Sebastiano Panichella, Sebastian Proksch, Gerald Schermann, Carmine Vassallo, Jitong Zhao: \textbf{Data-Driven Decisions and Actions in Today's Software Development}.  	\emph{The Essence of Software Engineering 2018}: 137-168
+\end{enumerate}
+
+\blankline
+
+\section{Awards}
+
+Best Paper Awards\footnote{
+ In papers marked with (*)  the authors are listed in alphabetic order}: %When such a rule is not followed, authors are listed by contribution.
+\begin{enumerate}
+ \item  G. Grano, T. Titov, S. Panichella, H. Gall. \textbf{How High Will It Be? Using Machine Learning Models to Predict Branch Coverage in Automated Testing}.  \emph{MaLTeSQuE}  (collocated with SANER 2018) 
+ 
+\item \textbf{Best paper award}\\
+A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, S. Panichella. \textbf{*Improving IR-based Traceability Recovery Using Smoothing Filters}. In: \emph{Proceedings of the 19th IEEE International Conference on Program Comprehension} (ICPC) 2011. Kingston, ON, Canada.   
+\item \textbf{Best tool award}\\
+ C. Vassallo, S. Panichella, G. Canfora, M. Di Penta. \textbf{CODES: mining sourCe cOde Descriptions from developErs diScussions}. In: \emph{Proceedings of the 36th International Conference on Program Comprehension} (ICPC 2014). Hyderabad, India.   
+ \item \textbf{Best tool award}\\
+ L. Pelloni, G. Grano, A. Ciurumelea, S. Panichella, F. Palomba, H. Gall. \textbf{BECLoMA: Augmenting Stack Traces with User Review Information.}.  \emph{Proceedings of the  {IEEE} 25th International Conference on Software Analysis, Evolution and Reengineering}  (SANER 2018)
+\end{enumerate}
+
+\section{Nominated as Best Paper}
+In papers marked with (*)  the authors are listed in alphabetic order. %When such a rule is not followed, authors are listed by contribution.
+\begin{enumerate}
+
+\item \label{Cm5} Annibale Panichella, \underline{Sebastiano Panichella}, Gordon Fraser, Anand Ashok Sawant and Vincent Hellendoorn:  \textbf{Revisiting Test Smells in Automatically Generated Tests: Limitations, Pitfalls, and Opportunities}  \emph{International Conference on Software Maintenance and Evolution (ICSME 2020)} 
+
+ \item \label{Cm4}  Muhammad Ilyas Azeem, S. Panichella, Andrea Di Sorbo, Alexander Serebrenik, and Qing Wang.  \textbf{ Action-based Recommendation in Pull-request Development}.  \emph{International Conference on Software and System Processes (ICSSP2020)}. Invited for journal extension.
+
+
+ \item \label{Cm3}  G. Grano, A. Ciurumelea, S. Panichella, F. Palomba, H. Gall. \textbf{ Exploring the Integration of User Feedback in Automated Testing of Android Applications.}.  \emph{Proceedings of the  {IEEE} 25th International Conference on Software Analysis, Evolution
+               and Reengineering}  (SANER 2018) 
+               
+
+      \item \label{Cm2}  C. Vassallo, S. Panichella, F. Palomba, S. Proksch, A. Zaidman and H. Gall. \textbf{Context is King: The Developer Perspective on the Usage of Static Analysis Tools.}.  \emph{Proceedings of the  {IEEE} 25th International Conference on Software Analysis, Evolution
+               and Reengineering}  (SANER 2018) 
+               
+                \item     C. Alexandru,  S. Panichella, Harald Gall. \textbf{Reducing Redundancies in Multi-Revision Code Analysis}. In: \emph{24th IEEE International Conference on Software Analysis, Evolution, and Reengineering  (SANER) 2017. Klagenfurt, Austria}.   
+     
+     \item  S. Panichella, G. Bavota, M. Di Penta, G. Canfora, G. Antoniol. \textbf{How Developers' Collaborations Identified from Different Sources Tell us About Code Changes}. In: \emph{Proceedings of the 30th International Conference on Software Maintenance and Evolution} (ICSME 2014). Victoria, Canada.  
+     
+    \item  S. Panichella, G. Canfora, M. Di Penta, R. Oliveto. \textbf{How the Evolution of Emerging Collaborations Relates to Code Changes: an Empirical Study}. In: \emph{Proceedings of the 36th International Conference on Program Comprehension} (ICPC 2014). Hyderabad, India.   
+
+    \item  G. Bavota, G. Canfora, M. Di Penta, R. Oliveto, S. Panichella. \textbf{*The Evolution of Project Inter-Dependencies in a Software Ecosystem: the Case of Apache}. In: \emph{Proceedings of the 29th International Conference on Software Maintenance} (ICSM 2013). Eindhoven, Netherlands.  
+    
+     \item G. Canfora, A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, S. Panichella. \textbf{*Multi-Objective Cross-Project Defect Prediction}. In: \emph{Proceedings of the 7th International Conference on Software Testing, Verification and Validation} (ICST 2013). Luxembourg.   
+
+     \item A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, S. Panichella. \textbf{*Using IR Methods for Labeling Source Code Artifacts: Is It Worthwhile?}. In: \emph{Proceedings of the 20th IEEE International Conference on Program Comprehension} (ICPC), 2012. Passau, Germany.   
+
+     \item  A. De Lucia, M. Di Penta, R. Oliveto, A. Panichella, S. Panichella. \textbf{*Improving IR-based Traceability Recovery Using Smoothing Filters}. In: \emph{Proceedings of the 19th IEEE International Conference on Program Comprehension} (ICPC) 2011. Kingston, ON, Canada.   
+\end{enumerate}
+
+\blankline
+
+\section{Talks Given}
+ 
+\begin{bibsection}
+\item \textbf{International Summer School on Software Engineering 2011}\\
+How identify Mentors in software projects?  \emph{July 2011}.
+
+\item \textbf{FSE 2012}\\
+Who is going to Mentor Newcomers in Open Source Projects?, \emph{November 2012}.
+
+\item \textbf{ICPC 2012}\\
+Mining source code descriptions from developer communications, \emph{June 2012}.
+
+\item \textbf{ICSE 2013}\\
+YODA: Young and newcOmer Developer Assistant, \emph{May 2013}.
+ 
+\item \textbf{ICSM 2013}\\
+Empirical Investigation on Documentation Usage Patterns in Maintenance Tasks, \emph{September}.
+
+\item \textbf{CSER 2013 - Concordia University downtown Montr√©al (http://concordia.ca)}\\
+Supporting Developers, Mining of Software Repositories, \emph{June}.
+
+\item \textbf{ICPC 2014}\\
+How the Evolution of Emerging Collaborations Relates to Code Changes: an Empirical Study, \emph{June}.
+
+\item \textbf{ICPC 2014}\\
+CODES: mining sourCe cOde Descriptions from developErs diScussions, \emph{June}.
+
+\item \textbf{ICMSE 2014}\\
+How Developers' Collaborations Identified from Different Sources Tell us About Code Changes, \emph{September}.
+
+\item \textbf{ASE 2014}\\
+Recommending Refactorings based on Team Co-Maintenance Patterns, \emph{September}.
+
+\item \textbf{SANER 2015}\\
+Would Static Analysis Tools Help Developers with Code Reviews? \emph{March}.
+
+\item \textbf{ICSME 2015}\\
+How Can I Improve My App? Classifying User Reviews for Software Maintenance and Evolution, \emph{October}.
+
+\item \textbf{ICSME 2015}\\
+Supporting Newcomers in Software Development Projects,  \emph{October}.
+
+\item \textbf{ASE 2015}\\
+Development Emails Content Analyzer: Intention Mining in Developer Discussions,  \emph{November}.
+
+\item \textbf{\href{http://www.lifl.fr/eosese/}{EOSESE 2015}}\\
+Textual Analysis or Natural Language Parsing? A Software Engineering Perspective,  \emph{December}.
+
+\item \textbf{``Adesso Quartalsmeeting" - 2016}\\
+Summarization Techniques for Code, Changes, and Testing,  \emph{February}.
+
+\item \textbf{Invited by Gran Sasso Science Institute, Center of Advanced Studies - 2016}\\
+Systematic Mining of Software Repositories,  \emph{July}.
+   
+\item \textbf{ICSE 2016}\\
+The Impact of Test Case Summaries on Bug Fixing Performance: An Empirical Investigation,  \emph{May}.
+
+\item \textbf{FSE 2016}\\
+ARdoc: App Reviews Development Oriented Classifier,  \emph{November}.
+
+\item \textbf{FSE 2016}\\
+What Would Users Change in My App? Summarizing App Reviews for Recommending Software Changes,  \emph{November}.
+
+\item \textbf{ICSE 2017}\\
+SURF: Summarizer of User Reviews Feedback.,  \emph{May}.
+
+\item \textbf{ICSE 2017}\\
+Analyzing APIs Documentation and Code to Detect Directive Defects,  \emph{May}.
+
+\item \textbf{VSS 2017}\\
+ Summarization Techniques for Code, Change, Testing and User Feedback \emph{December}.
+
+\item \textbf{VST (collocated with SANER 2018)}\\
+ Summarization Techniques for Code, Change, Testing and User Feedback \emph{March}.
+
+\item \textbf{SBST 2019} (collocated with ICSE 2019) DRONE: A Tool to Detect and Repair Directive Defects in Java APIs Documentation. May.
+\item \textbf{ICSE 2019} The Cloudification Perspectives of Search-based Software Testing May.
+\item \textbf{IC2E 2019} Quality and Feedback Techniques in Kubernetes Application Engineering June.
+\item \textbf{Talk at Cisco Systems GmbH 2019} - https://www.meetup.com/it-IT/Microservices-Zurich/events/262000623/ on Cloud-based testing. July.
+\item \textbf{ICSE 2020} - Java Unit Testing Tool Competition-Eighth Round . IEEE/ACM 42nd International Conference on Software Engineering Workshops (ICSE 2020).
+\item \textbf{RE-2020} - Requirements-Collector: Automating Requirements Specification from Elicitation Sessions and User Feedback . IEEE International Requirements Engineering Conference (RE'20).
+\item \textbf{FSE 2021 J1} Presentation of the paper: Sebastiano Panichella and Nik Zaugg:  An Empirical Investigation of Relevant Changes and Automation Needs in Modern Code Review.   Empirical Software Engineering (EMSE) Journal.  \\
+- etc.
+
+\end{bibsection}
+
+\section{Research Tools Implemented and Dataset Provided}
+
+\subsection{DATASET:} 
+A comprehensive and updated list of shared datasets (and implemented tools) to the research community by Sebastiano is available at \url{https://spanichella.github.io/tools.html} and linked to research paper at \url{https://spanichella.github.io/\#publications} \\ 
+
+\subsection{Examples of Tools:} 
+
+\textbf{\href{https://github.com/ChristianBirchler/sdc-scissor}{SDC-scissor:}}
+
+Simulation platforms facilitate the continuous development of complex systems such as self-driving cars (SDCs).
+However, previous results on testing SDCs using simulations have
+shown that most of the automatically generated tests do not
+strongly contribute to establishing confidence in the quality and
+reliability of the SDC. Therefore, those tests can be characterized
+as uninformative, and running them generally means wasting
+precious computational resources. We address this issue with
+SDC-Scissor, a framework that leverages Machine Learning to
+identify simulation-based tests that are unlikely to detect faults in
+the SDC software under test and skip them before their execution.
+Consequently, by filtering out those tests, SDC-Scissor reduces the
+number of long-running simulations to execute and drastically
+increases the cost-effectiveness of simulation-based testing of
+SDCs software. Our evaluation concerning two large datasets
+and around 12,000 tests showed that SDC-Scissor achieved a
+higher classification F1-score (between 47\% and 90\%) than a
+randomized baseline in identifying tests that lead to a fault and
+reduced the time spent running uninformative tests (speedup
+between 107\% and 170\%).\\
+Webpage \& Video: https://github.com/ChristianBirchler/sdc-scissor\\
+
+\textbf{\href{https://spanichella.github.io/tools.html}{DECA:}}
+
+\href{https://spanichella.github.io/tools.html}{DECA} (Development Emails Content Analyzer) is a java tool (available in \\ \href{https://spanichella.github.io/tools.html}{https://spanichella.github.io/tools.html})  to automatically recognize natural language fragments in emails that are relevant in the software engineering domain. Actually, DECA implements an approach which allows to recognize most informative sentences for development purposes by exploiting a set of recurrent natural language patterns that developers often use in such communication channel. DECA purpose is to capture the intent of each informative sentence (requesting a new feature, description of a problem, or proposing a solution) and consequently to allow developers to better manage the information contained in emails.
+\\\\\
+\textbf{\href{https://spanichella.github.io/tools.html}{ARdoc:}}
+
+\href{https://spanichella.github.io/tools.html}{ARdoc} (App Reviews Development Oriented Classifier) is a Java tool that automatically recognizes natural language fragments in user reviews that are relevant for developers to evolve their applications. Specifically, natural language fragments are extracted according to a taxonomy of app reviews categories that are relevant to software maintenance and evolution. The categories were defined in our previous paper entitled \textit{``How Can I Improve My App? Classifying User Reviews for Software Maintenance and Evolution''}  and are: (i) Information Giving, (ii) Information Seeking, (iii) Feature Request and (iv) Problem Discovery. ARdoc implements an approach that merges three techniques: (1) Natural Language Processing, (2) Text Analysis and (3) Sentiment Analysis to automatically classify app reviews into the proposed categories. The purpose of ARdoc is to capture informative user reviews (requesting a new feature, description of a problem, or proposing a solution) and consequently to allow developers to better manage the information contained in user reviews.
+\\\\\
+
+\textbf{\href{https://spanichella.github.io/tools.html}{SURF:}}
+
+Continuous Delivery (CD) enables mobile developers to release small, high quality chunks of working software in a rapid manner.  However, faster delivery and a higher software quality do neither guarantee user satisfaction nor positive business outcomes. Previous work demonstrates that app reviews may contain crucial information that can guide developer's software maintenance efforts to obtain higher customer satisfaction. However, previous work also proves the difficulties encountered by developers in manually analyzing this rich source of data, namely (i) the huge amount of reviews an app may receive on a daily basis and (ii) the unstructured nature of their content. In this paper, we introduce  \href{https://spanichella.github.io/tools.html}{\textbf{SURF}}  (\textbf{S}ummarizer of \textbf{U}ser \textbf{R}eviews \textbf{F}eedback) a tool able to (i) analyze and classify the information contained in app reviews and (ii) distill actionable change tasks for improving mobile applications. Specifically, SURF performs a systematic summarization of thousands of user reviews through the generation of an interactive, structured and condensed agenda of recommended software changes. An end-to-end evaluation of SURF, involving  2622 reviews related to 12 different mobile applications, demonstrates the high accuracy of SURF in summarizing user reviews content. In evaluating our approach we also involve the original developers of some analyzed apps, who confirm the practical usefulness of the software changes recommended by SURF.\\
+
+\textbf{As anticipated before, in each publication we share the tools, datasets and all other data required for performing the research. A comprehensive and updated list of the shared datasets and implemented tools shared to the research community are available at\\ https://spanichella.github.io/tools.html }\\\\
+
+\section{Paper Submitted to journals}
+In papers marked with (*)  the authors are listed in alphabetic order. %When such a rule is not followed, authors are listed by contribution.
+\textbf{\\\underline{Journal Publications after the P.h.D.}}\\
+\begin{bibenum}
+\item \label{J18} Sajad Khatiri and Christian Birchler and Bill Bosshard and Alessio Gambi and \underline{Sebastiano Panichella}: Machine Learning-based Test Selection for Simulation-based Testing of Self-driving Cars Software. Major revision at the Empirical Software Engineering Journal.  \doi{https://arxiv.org/abs/2107.09614}.  \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+\item \label{J17}  Christian Birchler and Sajad Khatiri and Pouria Derakhshanfar and  \underline{Sebastiano Panichella} and Annibale Panichella: Single and Multi-objective Test Cases Prioritization for Self-driving Cars in Virtual Environments. Major revision at the Journal ACM Transactions on Software Engineering and Methodology.  \\\doi{https://arxiv.org/abs/2107.09614}.  \textbf{Contributions:}  Data curation, Conceptualization, Software, Methodology, Investigation, Validation, Writing - original draft \& editing, Project administration.
+\end{bibenum}
+%\blankline
+
+%\section{Submitted Papers}
+%In papers marked with (*)  the authors are listed in alphabetic order. When such a rule is not followed, authors are listed by contribution.
+%\begin{bibenum}
+%      \item A. Di Sorbo,  S. Panichella, C. V. Alexandru, J. Shimagaki, C. A. Visaggio, G. Canfora, H. Gall.
+%         \textbf{What Would Users Change in My App? Summarizing App
+%Reviews for Recommending Software Changes}.  In: \emph{24th ACM SIGSOFT International Symposium on the Foundations of Software Engineering}  will be held in Seattle, WA, USA
+%\end{bibenum}
+
+%\section{Submitted Papers}
+%\begin{bibenum}
+    %     \item S. Panichella, H. Gall.       \textbf{Summarization Techniques for Code, Changes, and Testing}.  Technical Briefing proposal at  the  \emph{39th International Conference on Software Engineering} (ICSE 2017).
+      
+%                              \item C. Vassallo, F. Zampetti, D. Romano,  S. Panichella, M. Di Penta and A. Zaidman  \textbf{What Types of Build Failures Stop Continuous Delivery? An Empirical Study at ING NL}.    In: \emph{39th International Conference on Software Engineering} (ICSE 2017).
+ 
+
+%\end{bibenum} 
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------%
+% The following is copyright and licensing information for
+% redistribution of this LaTeX source code; it also includes a liability
+% statement. If this source code is not being redistributed to others,
+% it may be omitted. It has no effect on the function of the above code.
+%----------------------------------------------------------------------%
+% Copyright (c) 2007, 2008, 2009, 2010, 2011 by Theodore P. Pavlic
+%
+% Unless otherwise expressly stated, this work is licensed under the
+% Creative Commons Attribution-Noncommercial 3.0 United States License. To
+% view a copy of this license, visit
+% http://creativecommons.org/licenses/by-nc/3.0/us/ or send a letter to
+% Creative Commons, 171 Second Street, Suite 300, San Francisco,
+% California, 94105, USA.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+% MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+% IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+% CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+% TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+% SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+%----------------------------------------------------------------------%
