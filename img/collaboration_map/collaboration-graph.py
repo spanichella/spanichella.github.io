@@ -312,7 +312,7 @@ known_affiliations = {
 #     print(f"{author}: {country}")
 
 
-##PART 3
+##PART 3 - create map
 
 import folium
 import time
@@ -367,7 +367,7 @@ collaborators = {
     "Gerardo Canfora": "Italy",
     "Giovanni Capobianco": "Italy",
     "Giovanni Grano": "Switzerland",
-    "Giovani Guizzo": "USA",
+    "Giovani Guizzo": "UK",
     "Giuliano Antoniol": "Canada",
     "Gordon Fraser": "Germany",
     "Gregorio Robles": "Spain",
@@ -437,6 +437,18 @@ collaborators = {
     "Yanqi Su": "China",
     "Yu Zhou": "China",
     "Zhiqiu Huang": "China",
+    "Tahereh Zohdinasab": "Switzerland",
+    "Victor Crespo Rodriguez":"Australia",
+    "Neelofar":"Australia",
+    "Atefeh Rohani":"Switzerland", 
+    "Gregorio Dalia":"Italy", 
+    "Alexander Boll":"Switzerland", 
+    "Sandro Hernandez Goicochea":"Switzerland",  
+    "Aldeida Aleti":"Australia",
+    "Catia Trubiani":"Italy", 
+    "Anna Rita Fasolino":"Italy", 
+    "Alexandre Bergel":"Chile", 
+    "Sasa Miladinovic":"Switzerland", 
     # Company collaborations
     "Genedata (Biopharma R&D)": "Switzerland",
     "Terraview (Agriculture)": "Switzerland",
